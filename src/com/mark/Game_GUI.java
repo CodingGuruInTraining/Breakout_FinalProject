@@ -12,7 +12,7 @@ public class Game_GUI extends JPanel {
 
 
     protected int BOARD_WIDTH = 400;
-    protected int BOARD_HEIGHT = 600;
+    protected int BOARD_HEIGHT = 500;
 
     public int getBOARD_WIDTH() { return BOARD_WIDTH; }
     public int getBOARD_HEIGHT() { return BOARD_HEIGHT; }
@@ -39,14 +39,35 @@ public class Game_GUI extends JPanel {
 
         // Draws paddle at starting point.
         g.setColor(Color.white);
-        g.fillRect(BOARD_WIDTH/2 - 20, BOARD_HEIGHT - 20, 40, 10);
+        g.fillRect(BOARD_WIDTH / 2 - 20, BOARD_HEIGHT - 20, 40, 10);
 
-        g.setColor(Color.GREEN);
-        g.fillRect(0, 0, 40, 10);
-        g.setColor(Color.blue);
-        g.fillRect(0, 11, 40, 10);
+        // Static additions to figure out placement.
+// TODO find this code a home
+        Color[] colorArray = {Color.green, Color.blue, Color.cyan, Color.yellow};
+//        int x = 0;
+        int y = 0;
+        for (int k = 0; k < colorArray.length; k++) {
+//            g.setColor(Color.GREEN);
+            int brickWidth = 40;
+            int brickHeight = 10;
+            int x = 0;
+//            int y = 0;
+            for (int i = 0; i < 10; i++) {
+// TODO might want buffer room later on
+                g.setColor(colorArray[k]);
+                g.fillRect(x, y, brickWidth, brickHeight);
+                g.setColor(Color.white);
+                g.drawRect(x, y, brickWidth, brickHeight);
+// TODO could do (x + (x * i), (y +....
+                x += brickWidth;
+//            y += brickHeight;
+                if (i == 9) { y += brickHeight; }
+            }
+//            y += brickHeight;
+//            g.setColor(Color.blue);
+//            g.fillRect(0, 11, 40, 10);
+        }
     }
-
 //    protected void drawPaddle(Graphics g) {
 //
 //    }
