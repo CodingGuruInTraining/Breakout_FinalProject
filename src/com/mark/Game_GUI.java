@@ -25,7 +25,7 @@ public class Game_GUI extends JPanel {
 
 // TODO will need parameters at some point maybe.
 // TODO might need to move to manager.
-        Paddle paddle = new Paddle();
+        Paddle paddle = new Paddle(BOARD_WIDTH, BOARD_HEIGHT);
         Ball ball = new Ball();
 
     }
