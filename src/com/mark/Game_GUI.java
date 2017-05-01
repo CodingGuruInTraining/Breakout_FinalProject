@@ -14,14 +14,13 @@ public class Game_GUI extends JPanel {
     protected int BOARD_WIDTH = 400;
     protected int BOARD_HEIGHT = 600;
 
+    public int getBOARD_WIDTH() { return BOARD_WIDTH; }
+    public int getBOARD_HEIGHT() { return BOARD_HEIGHT; }
 
     Game_GUI() {
         super();
         setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
-//        setContentPane(rootPanel);
-//        pack();
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setVisible(true);
+
 
 // TODO will need parameters at some point maybe.
 // TODO might need to move to manager.
@@ -33,18 +32,24 @@ public class Game_GUI extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        // Draws game board background.
         g.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
         g.setColor(Color.black);
         g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
 
-
-    }
-
-    protected void drawPaddle(Graphics g) {
+        // Draws paddle at starting point.
         g.setColor(Color.white);
-        g.fillRect(BOARD_WIDTH/2 - 20, BOARD_HEIGHT - 10, 40, 10);
+        g.fillRect(BOARD_WIDTH/2 - 20, BOARD_HEIGHT - 20, 40, 10);
+
+        g.setColor(Color.GREEN);
+        g.fillRect(0, 0, 40, 10);
+        g.setColor(Color.blue);
+        g.fillRect(0, 11, 40, 10);
     }
+
+//    protected void drawPaddle(Graphics g) {
+//
+//    }
 
 
 }

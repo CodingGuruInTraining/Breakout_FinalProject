@@ -1,5 +1,7 @@
 package com.mark;
 
+import java.awt.*;
+
 /**
  * Created by hl4350hb on 5/1/2017.
  */
@@ -26,6 +28,7 @@ public class Paddle {
 
 
 
+
         // Might use to reset position after losing a life or something.
         this.START_X = this.x_loc;
         this.START_Y = this.y_loc;
@@ -35,6 +38,7 @@ public class Paddle {
     protected void draw() {
 
     }
+
 
 
 
