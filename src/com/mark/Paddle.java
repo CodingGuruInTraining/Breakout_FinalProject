@@ -26,12 +26,6 @@ public class Paddle {
 
     }
 
-    // Collision detection method.
-    protected boolean detectCollision() {
-        if (1 == 1) {
-            return true;
-        }
-        return false;
-    }
+
 
 }

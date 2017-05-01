@@ -21,4 +21,8 @@ public class GameMgr {
 
     }
 
+    // Collision detection method that can be used by either class.
+    protected boolean detectCollision() {
+        return true;
+    }
 }

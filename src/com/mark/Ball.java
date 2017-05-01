@@ -17,9 +17,6 @@ public class Ball {
 
     }
 
-    // Collision detection method.
-    protected boolean detectCollision() {
-        return true;
-    }
+
 
 }
