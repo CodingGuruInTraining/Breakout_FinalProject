@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class GameMgr {
 
     protected Game_GUI gui;
-    protected JFrame frame;
+    protected Game_GUI gameFrame;
 
     protected ArrayList<Brick> bricks;
     protected Paddle paddle;
@@ -19,17 +19,23 @@ public class GameMgr {
     int BOARD_HEIGHT;
 
     // Constructor.
-    GameMgr(JFrame frame, Game_GUI gui) {
-        this.frame = frame;
-        this.gui = gui;
+    public GameMgr() {
+        gameFrame = new Game_GUI();
 
-        BOARD_WIDTH = gui.getBOARD_WIDTH();
-        BOARD_HEIGHT = gui.getBOARD_HEIGHT();
 
-        bricks = new ArrayList<Brick>();
-        paddle = new Paddle(BOARD_WIDTH, BOARD_HEIGHT);
 
-        setupGame();
+
+
+//        this.frame = frame;
+//        this.gui = gui;
+//
+//        BOARD_WIDTH = gui.getBOARD_WIDTH();
+//        BOARD_HEIGHT = gui.getBOARD_HEIGHT();
+//
+//        bricks = new ArrayList<Brick>();
+//        paddle = new Paddle(BOARD_WIDTH, BOARD_HEIGHT);
+//
+//        setupGame();
     }
 
     // Init method.
