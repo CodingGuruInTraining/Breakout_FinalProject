@@ -10,8 +10,8 @@ import static java.awt.Color.black;
 public class Brick {
 
 // TODO maybe make dynamic somehow later on
-    protected static int BRICK_WIDTH = 100;
-    protected static int BRICK_HEIGHT = 20;
+    protected static int BRICK_WIDTH = 100;     // 40
+    protected static int BRICK_HEIGHT = 20;     // 10
 
     protected static int BOARD_WIDTH;
     protected static int BOARD_HEIGHT;

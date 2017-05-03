@@ -46,7 +46,7 @@ public class GameMgr implements Runnable{
 //        timer = new Timer();
 //        timer.scheduleAtFixedRate(something, 0, 100);
         paddle = new Paddle(BOARD_WIDTH, BOARD_HEIGHT);
-
+        ball = new Ball(BOARD_WIDTH, BOARD_HEIGHT);
         // total guess and it worked!:
         Brick.BOARD_WIDTH = BOARD_WIDTH;
         Brick.BOARD_HEIGHT = BOARD_HEIGHT;
@@ -95,6 +95,7 @@ public class GameMgr implements Runnable{
         // draw paddle (-1 is left, 0 no move, 1 is right)
         paddle.draw(gameFrame.getMoveDirection(), graphics);
         // draw ball
+        ball.draw(graphics);
         // draw bricks
         makeBricks();           // just using starting point method for now
 
@@ -141,7 +142,8 @@ public class GameMgr implements Runnable{
     }
 
     protected void makeBricks() {
-        for (int i = 0; i < 1; i++) {       // for num of rows...
+// TODO change rowsofbricks to array length or something
+        for (int i = 0; i < rowsOfBricks; i++) {       // for num of rows...
             for (int k = 0; k < bricksPerRow; k++) {    // for bricks in each row...
                 Brick b = new Brick(
                         (k * brickWidth),       // x coord
