@@ -16,6 +16,9 @@ public class Ball {
     protected int x_spd;
     protected int y_spd;
 
+    public int getX() { return this.x_loc; }
+    public int getY() { return this.y_loc; }
+
     Ball(int boardWidth, int boardHeight) {
         this.BOARD_WIDTH = boardWidth;
         this.BOARD_HEIGHT = boardHeight;

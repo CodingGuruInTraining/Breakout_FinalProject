@@ -33,6 +33,8 @@ public class Brick {
         g.drawRect(this.x_loc, this.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
     }
 
+    protected boolean checkCollision()
+
     // Draw/redraw method.
 //    protected void draw(int x, int y, Color color, Graphics g) {
 //        this.x_loc = x;

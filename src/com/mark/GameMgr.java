@@ -156,7 +156,11 @@ public class GameMgr implements Runnable{
     }
 
     protected void detectCollisions() {
+        int ballx = ball.getX();
+        int bally = ball.getY();
+        for (Brick b : bricks) {
 
+        }
     }
 
 
