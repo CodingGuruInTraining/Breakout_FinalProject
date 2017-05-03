@@ -15,12 +15,33 @@ public class Game_GUI {
     protected int BOARD_WIDTH = 300;
     protected int BOARD_HEIGHT = 400;
 
-    public int getBOARD_WIDTH() { return BOARD_WIDTH; }
-    public int getBOARD_HEIGHT() { return BOARD_HEIGHT; }
+    public int getBOARD_WIDTH() {
+        return BOARD_WIDTH;
+    }
+
+    public int getBOARD_HEIGHT() {
+        return BOARD_HEIGHT;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
 
     public Game_GUI() {
         frame = new JFrame("Breakout Attempt");
+        frame.setSize(BOARD_WIDTH, BOARD_HEIGHT);
+//        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setVisible(true);
+
         canvas = new Canvas();
+        canvas.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+        frame.add(canvas);
+        frame.pack();
+    }
+
+
 
 //
 //        super();
@@ -77,5 +98,5 @@ public class Game_GUI {
 ////
 ////    }
 //
-    }
-}
+        }
+

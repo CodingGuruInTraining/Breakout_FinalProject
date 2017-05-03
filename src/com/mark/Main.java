@@ -14,6 +14,7 @@ public class Main{
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame.setVisible(true);
         GameMgr mgr = new GameMgr();
+        mgr.startGame();
 
     }
 }
