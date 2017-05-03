@@ -1,7 +1,7 @@
 package com.mark;
 
 /**
- * Created by hl4350hb on 5/3/2017.
+ * This Interface defines the static values used between objects.
  */
 public interface Globals {
     public static final int BOARD_WIDTH = 300;
@@ -21,5 +21,5 @@ public interface Globals {
 
 
 
-//learned about this shared variable class thing from:
+//learned about this interface thing from:
 //        http://zetcode.com/tutorials/javagamestutorial/breakout/

@@ -1,85 +1,83 @@
 package com.mark;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Timer;
 
 /**
- * Created by hl4350hb on 5/1/2017.
+ * This Class outlines the design for a Game Manager object,
+ * which controls a lot of the game processing.
  */
 public class GameMgr implements Runnable, Globals{
-
-//    protected Game_GUI gui;
+    // Defines single object variables.
     protected Game_GUI gameFrame;
     protected Thread gameInstance;
     protected BufferStrategy bufferStrategy;
     protected Graphics graphics;
-
-    // Objects.
     protected ArrayList<Brick> bricks;
     protected Paddle paddle;
     protected Ball ball;
-    protected Timer timer;
 
-    // Variables.
-//    protected int BOARD_WIDTH;
-//    protected int BOARD_HEIGHT;
+    // Flag variable to indicate "game state."
     protected boolean gameON = false;
     // Determines speed of redraw.
     protected int fps = 40;
-
+    // Creates array of color objects.
     protected Color[] brickColors = { Color.red, Color.orange, Color.yellow,
             Color.green, Color.blue, Color.magenta };
+
+    // Defines non-mutable variables.
     protected int bricksPerRow;
     // Can change later on to make more "difficult."
     protected int rowsOfBricks = 6;
-//    protected int brickWidth;
-//    protected int brickHeight;
 
     // Constructor.
     public GameMgr() {
+        // Instantiates single objects.
         gameFrame = new Game_GUI();
-//        BOARD_WIDTH = gameFrame.getBOARD_WIDTH();
-//        BOARD_HEIGHT = gameFrame.getBOARD_HEIGHT();
-//        timer = new Timer();
-//        timer.scheduleAtFixedRate(something, 0, 100);
         paddle = new Paddle();
         ball = new Ball();
-        // total guess and it worked!:
-//        Brick.BOARD_WIDTH = BOARD_WIDTH;
-//        Brick.BOARD_HEIGHT = BOARD_HEIGHT;
 
-//        brickWidth = Brick.getBRICK_WIDTH();
-//        brickHeight = Brick.getBRICK_HEIGHT();
+        // Calculates how many bricks can fit on the board and
+        // sets variable value.
         bricksPerRow = BOARD_WIDTH / BRICK_WIDTH;
+        // Creates array to hold all the Brick objects.
         bricks = new ArrayList<Brick>();
     }
 
-    // Run method must be public for some reason.
+    // Standard run method that runs the app.
     public void run() {
-        setupGame();
-
+        // Calculates how many nanoseconds are in one cycle.
         double microTicks = 1000000000/fps;
         double diff = 0;
+        // Makes variable to hold time values down to the nanosecond.
         long currentTime;
         long prevCurrTime = System.nanoTime();
 
+        // Loops until variable value is changed.
         while (gameON) {
+// TODO make a gameover part
+            // Gets current time in nanoseconds.
             currentTime = System.nanoTime();
+            // Calculates how much time has passed since the last cycle.
             diff += (currentTime - prevCurrTime) / microTicks;
             prevCurrTime = currentTime;
+            // Checks if enough time has passed to redraw game.
             if (diff >= 1) {
                 draw();
                 diff = 0;
             }
         }
+        // Runs Thread ending method as a redundant safety action.
         endGame();
     }
 
     private void draw() {
+        // Generates a BufferedStrategy object to utilize buffer frames
+        // between renders.
         bufferStrategy = gameFrame.getCanvas().getBufferStrategy();
+        // Checks if an instance already exists and creates one if not.
         if (bufferStrategy == null) {
             // Note: One buffer is not enough.
             gameFrame.getCanvas().createBufferStrategy(2);
@@ -90,27 +88,22 @@ public class GameMgr implements Runnable, Globals{
         // Clears board.
         graphics.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
 
-
+        // Runs background draw method.
         gameFrame.draw(graphics);
-        // draw paddle (-1 is left, 0 no move, 1 is right)
+        // Runs the Paddle's draw method and passes an integer. The
+        // integer comes from the game frame's keypressed event.
         paddle.draw(gameFrame.getMoveDirection(), graphics);
-        // draw ball
+        // Runs the Ball's draw method.
         ball.draw(graphics);
-        // draw bricks
+        // Runs method to draw all active Bricks.
         makeBricks();           // just using starting point method for now
 
-
+        // Finalize process.
         bufferStrategy.show();
         graphics.dispose();
     }
 
-    // Init method.
-    protected void setupGame() {
-        // May not need anymore.
 
-
-//        makeBricks();
-    }
 
     // Creates new game instance/thread.
     public synchronized void startGame() {
@@ -142,6 +135,7 @@ public class GameMgr implements Runnable, Globals{
     }
 
     protected void makeBricks() {
+        // Makes Brick objects and store in array.
 // TODO change rowsofbricks to array length or something
         for (int i = 0; i < rowsOfBricks; i++) {       // for num of rows...
             for (int k = 0; k < bricksPerRow; k++) {    // for bricks in each row...
@@ -162,27 +156,6 @@ public class GameMgr implements Runnable, Globals{
 
         }
     }
-
-
-//        this.frame = frame;
-//        this.gui = gui;
-//
-//        BOARD_WIDTH = gui.getBOARD_WIDTH();
-//        BOARD_HEIGHT = gui.getBOARD_HEIGHT();
-//
-//        bricks = new ArrayList<Brick>();
-//        paddle = new Paddle(BOARD_WIDTH, BOARD_HEIGHT);
-//
-//        setupGame();
-//    }
-
-
-
-    // Collision detection method that can be used by either class.
-//    protected boolean detectCollision() {
-//// TODO fill in
-//        return true;
-//    }
 }
 
 
