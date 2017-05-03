@@ -96,7 +96,7 @@ public class GameMgr implements Runnable{
         paddle.draw(gameFrame.getMoveDirection(), graphics);
         // draw ball
         // draw bricks
-
+        makeBricks();           // just using starting point method for now
 
 
         bufferStrategy.show();
@@ -144,8 +144,8 @@ public class GameMgr implements Runnable{
         for (int i = 0; i < 1; i++) {       // for num of rows...
             for (int k = 0; k < bricksPerRow; k++) {    // for bricks in each row...
                 Brick b = new Brick(
-                        (i * brickWidth),       // x coord
-                        (k * brickHeight),      // y coord
+                        (k * brickWidth),       // x coord
+                        (i * brickHeight),      // y coord
                         brickColors[i],         // color of brick
                         graphics);
                 bricks.add(b);
