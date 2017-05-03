@@ -35,8 +35,8 @@ public class GameMgr implements Runnable, Globals{
     protected int bricksPerRow;
     // Can change later on to make more "difficult."
     protected int rowsOfBricks = 6;
-    protected int brickWidth;
-    protected int brickHeight;
+//    protected int brickWidth;
+//    protected int brickHeight;
 
     // Constructor.
     public GameMgr() {
@@ -46,14 +46,14 @@ public class GameMgr implements Runnable, Globals{
 //        timer = new Timer();
 //        timer.scheduleAtFixedRate(something, 0, 100);
         paddle = new Paddle();
-        ball = new Ball(BOARD_WIDTH, BOARD_HEIGHT);
+        ball = new Ball();
         // total guess and it worked!:
 //        Brick.BOARD_WIDTH = BOARD_WIDTH;
 //        Brick.BOARD_HEIGHT = BOARD_HEIGHT;
 
-        brickWidth = Brick.getBRICK_WIDTH();
-        brickHeight = Brick.getBRICK_HEIGHT();
-        bricksPerRow = BOARD_WIDTH / brickWidth;
+//        brickWidth = Brick.getBRICK_WIDTH();
+//        brickHeight = Brick.getBRICK_HEIGHT();
+        bricksPerRow = BOARD_WIDTH / BRICK_WIDTH;
         bricks = new ArrayList<Brick>();
     }
 
@@ -146,8 +146,8 @@ public class GameMgr implements Runnable, Globals{
         for (int i = 0; i < rowsOfBricks; i++) {       // for num of rows...
             for (int k = 0; k < bricksPerRow; k++) {    // for bricks in each row...
                 Brick b = new Brick(
-                        (k * brickWidth),       // x coord
-                        (i * brickHeight),      // y coord
+                        (k * BRICK_WIDTH),       // x coord
+                        (i * BRICK_HEIGHT),      // y coord
                         brickColors[i],         // color of brick
                         graphics);
                 bricks.add(b);
@@ -179,10 +179,10 @@ public class GameMgr implements Runnable, Globals{
 
 
     // Collision detection method that can be used by either class.
-    protected boolean detectCollision() {
-// TODO fill in
-        return true;
-    }
+//    protected boolean detectCollision() {
+//// TODO fill in
+//        return true;
+//    }
 }
 
 

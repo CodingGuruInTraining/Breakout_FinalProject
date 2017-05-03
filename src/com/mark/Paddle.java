@@ -7,8 +7,8 @@ import java.awt.*;
  */
 public class Paddle implements Globals{
 
-    protected int PADDLE_WIDTH = 50;
-    protected int PADDLE_HEIGHT = 10;
+//    protected int PADDLE_WIDTH = 50;
+//    protected int PADDLE_HEIGHT = 10;
     protected int START_X;
     protected int START_Y;
 //    protected int BOARD_WIDTH;

@@ -7,7 +7,7 @@ import java.awt.*;
  */
 public class Ball implements Globals {
 
-    protected int BALL_DIAMETER = 20;       // 10
+//    protected int BALL_DIAMETER = 20;       // 10
 //    protected int BOARD_WIDTH;
 //    protected int BOARD_HEIGHT;
 
@@ -19,7 +19,7 @@ public class Ball implements Globals {
     public int getX() { return this.x_loc; }
     public int getY() { return this.y_loc; }
 
-    Ball(int boardWidth, int boardHeight) {
+    Ball() {
 //        this.BOARD_WIDTH = boardWidth;
 //        this.BOARD_HEIGHT = boardHeight;
         this.x_loc = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
