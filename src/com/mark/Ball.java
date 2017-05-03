@@ -5,11 +5,11 @@ import java.awt.*;
 /**
  * Created by hl4350hb on 5/1/2017.
  */
-public class Ball {
+public class Ball implements Globals {
 
     protected int BALL_DIAMETER = 20;       // 10
-    protected int BOARD_WIDTH;
-    protected int BOARD_HEIGHT;
+//    protected int BOARD_WIDTH;
+//    protected int BOARD_HEIGHT;
 
     protected int x_loc;
     protected int y_loc;
@@ -20,8 +20,8 @@ public class Ball {
     public int getY() { return this.y_loc; }
 
     Ball(int boardWidth, int boardHeight) {
-        this.BOARD_WIDTH = boardWidth;
-        this.BOARD_HEIGHT = boardHeight;
+//        this.BOARD_WIDTH = boardWidth;
+//        this.BOARD_HEIGHT = boardHeight;
         this.x_loc = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
         this.y_loc = ((BOARD_HEIGHT / 2) - (BALL_DIAMETER / 2));
         this.x_spd = 1;

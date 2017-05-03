@@ -5,14 +5,14 @@ import java.awt.*;
 /**
  * Created by hl4350hb on 5/1/2017.
  */
-public class Paddle {
+public class Paddle implements Globals{
 
     protected int PADDLE_WIDTH = 50;
     protected int PADDLE_HEIGHT = 10;
     protected int START_X;
     protected int START_Y;
-    protected int BOARD_WIDTH;
-    protected int BOARD_HEIGHT;
+//    protected int BOARD_WIDTH;
+//    protected int BOARD_HEIGHT;
 
     protected int x_loc;
     protected int y_loc;
@@ -24,11 +24,11 @@ public class Paddle {
     public int getY_loc() { return y_loc; }
 
     // Constructor.
-    Paddle(int boardWidth, int boardHeight) {
-        this.x_loc = ((boardWidth/2) - (PADDLE_WIDTH/2));
-        this.y_loc = (boardHeight - (2*PADDLE_HEIGHT));
-        this.BOARD_WIDTH = boardWidth;
-        this.BOARD_HEIGHT = boardHeight;
+    Paddle() {
+        this.x_loc = ((BOARD_WIDTH/2) - (PADDLE_WIDTH/2));
+        this.y_loc = (BOARD_HEIGHT - (2*PADDLE_HEIGHT));
+//        this.BOARD_WIDTH = boardWidth;
+//        this.BOARD_HEIGHT = boardHeight;
         System.out.println("Starting at " + this.x_loc + ", " + this.y_loc);
 
 

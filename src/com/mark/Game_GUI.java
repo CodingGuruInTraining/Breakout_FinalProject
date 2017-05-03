@@ -8,23 +8,23 @@ import java.awt.event.KeyListener;
 /**
  * Created by hl4350hb on 5/1/2017.
  */
-public class Game_GUI implements KeyListener {
+public class Game_GUI implements KeyListener, Globals {
     private JFrame frame;
 //    private JPanel rootPanel;
     ///  etc...
     private Canvas canvas;
 
-    protected int BOARD_WIDTH = 300;
-    protected int BOARD_HEIGHT = 400;
+//    protected int BOARD_WIDTH = 300;
+//    protected int BOARD_HEIGHT = 400;
     protected int moveDirection = 0;
 
     // Getters.
-    public int getBOARD_WIDTH() {
-        return BOARD_WIDTH;
-    }
-    public int getBOARD_HEIGHT() {
-        return BOARD_HEIGHT;
-    }
+//    public int getBOARD_WIDTH() {
+//        return BOARD_WIDTH;
+//    }
+//    public int getBOARD_HEIGHT() {
+//        return BOARD_HEIGHT;
+//    }
     public Canvas getCanvas() {
         return canvas;
     }

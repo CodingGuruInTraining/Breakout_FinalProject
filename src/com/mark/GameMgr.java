@@ -9,7 +9,7 @@ import java.util.Timer;
 /**
  * Created by hl4350hb on 5/1/2017.
  */
-public class GameMgr implements Runnable{
+public class GameMgr implements Runnable, Globals{
 
 //    protected Game_GUI gui;
     protected Game_GUI gameFrame;
@@ -24,8 +24,8 @@ public class GameMgr implements Runnable{
     protected Timer timer;
 
     // Variables.
-    protected int BOARD_WIDTH;
-    protected int BOARD_HEIGHT;
+//    protected int BOARD_WIDTH;
+//    protected int BOARD_HEIGHT;
     protected boolean gameON = false;
     // Determines speed of redraw.
     protected int fps = 40;
@@ -41,15 +41,15 @@ public class GameMgr implements Runnable{
     // Constructor.
     public GameMgr() {
         gameFrame = new Game_GUI();
-        BOARD_WIDTH = gameFrame.getBOARD_WIDTH();
-        BOARD_HEIGHT = gameFrame.getBOARD_HEIGHT();
+//        BOARD_WIDTH = gameFrame.getBOARD_WIDTH();
+//        BOARD_HEIGHT = gameFrame.getBOARD_HEIGHT();
 //        timer = new Timer();
 //        timer.scheduleAtFixedRate(something, 0, 100);
-        paddle = new Paddle(BOARD_WIDTH, BOARD_HEIGHT);
+        paddle = new Paddle();
         ball = new Ball(BOARD_WIDTH, BOARD_HEIGHT);
         // total guess and it worked!:
-        Brick.BOARD_WIDTH = BOARD_WIDTH;
-        Brick.BOARD_HEIGHT = BOARD_HEIGHT;
+//        Brick.BOARD_WIDTH = BOARD_WIDTH;
+//        Brick.BOARD_HEIGHT = BOARD_HEIGHT;
 
         brickWidth = Brick.getBRICK_WIDTH();
         brickHeight = Brick.getBRICK_HEIGHT();

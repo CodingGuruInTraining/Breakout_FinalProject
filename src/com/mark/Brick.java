@@ -13,8 +13,8 @@ public class Brick {
     protected static int BRICK_WIDTH = 100;     // 40
     protected static int BRICK_HEIGHT = 20;     // 10
 
-    protected static int BOARD_WIDTH;
-    protected static int BOARD_HEIGHT;
+//    protected static int BOARD_WIDTH;
+//    protected static int BOARD_HEIGHT;
 
     protected int x_loc;
     protected int y_loc;
@@ -33,7 +33,11 @@ public class Brick {
         g.drawRect(this.x_loc, this.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
     }
 
-    protected boolean checkCollision()
+//    protected boolean checkCollision()
+
+
+
+
 
     // Draw/redraw method.
 //    protected void draw(int x, int y, Color color, Graphics g) {
