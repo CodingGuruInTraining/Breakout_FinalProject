@@ -42,6 +42,7 @@ public class Game_GUI implements KeyListener {
         canvas = new Canvas();
         canvas.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
         frame.add(canvas);
+        frame.addKeyListener(this);
         frame.pack();
     }
 
@@ -52,26 +53,22 @@ public class Game_GUI implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("keytype event?");
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("keypressed event reached");
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             moveDirection = -1;
-            System.out.println("left key pressed");
         }
         else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             moveDirection = 1;
-            System.out.println("right key pressed");
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         moveDirection = 0;
-        System.out.println("keys released");
     }
 
 //
@@ -131,3 +128,9 @@ public class Game_GUI implements KeyListener {
 //
         }
 
+
+
+
+
+//helpers:
+//        http://stackoverflow.com/questions/21997130/how-to-use-keylistener-with-jframe
