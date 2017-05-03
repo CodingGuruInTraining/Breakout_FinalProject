@@ -2,31 +2,35 @@ package com.mark;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * Created by hl4350hb on 5/1/2017.
  */
-public class Game_GUI {
+public class Game_GUI implements KeyListener {
     private JFrame frame;
-    private JPanel rootPanel;
+//    private JPanel rootPanel;
     ///  etc...
     private Canvas canvas;
 
     protected int BOARD_WIDTH = 300;
     protected int BOARD_HEIGHT = 400;
+    protected int moveDirection = 0;
 
+    // Getters.
     public int getBOARD_WIDTH() {
         return BOARD_WIDTH;
     }
-
     public int getBOARD_HEIGHT() {
         return BOARD_HEIGHT;
     }
-
     public Canvas getCanvas() {
         return canvas;
     }
+    public int getMoveDirection() { return moveDirection; }
 
+    // Constructor.
     public Game_GUI() {
         frame = new JFrame("Breakout Attempt");
         frame.setSize(BOARD_WIDTH, BOARD_HEIGHT);
@@ -41,7 +45,34 @@ public class Game_GUI {
         frame.pack();
     }
 
+    protected void draw(Graphics g) {
+        g.setColor(Color.black);
+        g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+    }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+        System.out.println("keytype event?");
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println("keypressed event reached");
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            moveDirection = -1;
+            System.out.println("left key pressed");
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            moveDirection = 1;
+            System.out.println("right key pressed");
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        moveDirection = 0;
+        System.out.println("keys released");
+    }
 
 //
 //        super();

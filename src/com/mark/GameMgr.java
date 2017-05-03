@@ -4,38 +4,60 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.Timer;
 
 /**
  * Created by hl4350hb on 5/1/2017.
  */
 public class GameMgr implements Runnable{
 
-    protected Game_GUI gui;
+//    protected Game_GUI gui;
     protected Game_GUI gameFrame;
     protected Thread gameInstance;
     protected BufferStrategy bufferStrategy;
     protected Graphics graphics;
 
+    // Objects.
     protected ArrayList<Brick> bricks;
     protected Paddle paddle;
     protected Ball ball;
+    protected Timer timer;
 
+    // Variables.
     protected int BOARD_WIDTH;
     protected int BOARD_HEIGHT;
     protected boolean gameON = false;
+    // Determines speed of redraw.
+    protected int fps = 40;
+
 
     // Constructor.
     public GameMgr() {
         gameFrame = new Game_GUI();
         BOARD_WIDTH = gameFrame.getBOARD_WIDTH();
         BOARD_HEIGHT = gameFrame.getBOARD_HEIGHT();
+//        timer = new Timer();
+//        timer.scheduleAtFixedRate(something, 0, 100);
+        paddle = new Paddle(BOARD_WIDTH, BOARD_HEIGHT);
     }
 
     // Run method must be public for some reason.
     public void run() {
         setupGame();
+
+        double microTicks = 1000000000/fps;
+        double diff = 0;
+        long currentTime;
+        long prevCurrTime = System.nanoTime();
+
         while (gameON) {
-            draw();
+            currentTime = System.nanoTime();
+            diff += (currentTime - prevCurrTime) / microTicks;
+            prevCurrTime = currentTime;
+            if (diff >= 1) {
+                draw();
+                diff = 0;
+            }
         }
         endGame();
     }
@@ -43,12 +65,22 @@ public class GameMgr implements Runnable{
     private void draw() {
         bufferStrategy = gameFrame.getCanvas().getBufferStrategy();
         if (bufferStrategy == null) {
-            gameFrame.getCanvas().createBufferStrategy(1);
+            // Note: One buffer is not enough.
+            gameFrame.getCanvas().createBufferStrategy(2);
             return;
         }
-
+        // Makes graphics object for drawing.
         graphics = bufferStrategy.getDrawGraphics();
+        // Clears board.
         graphics.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+
+
+        gameFrame.draw(graphics);
+        // draw paddle (-1 is left, 0 no move, 1 is right)
+        paddle.draw(gameFrame.getMoveDirection(), graphics);
+        // draw ball
+        // draw bricks
+
 
 
         bufferStrategy.show();
@@ -57,9 +89,10 @@ public class GameMgr implements Runnable{
 
     // Init method.
     protected void setupGame() {
-
+        // May not need anymore.
     }
 
+    // Creates new game instance/thread.
     public synchronized void startGame() {
         if (gameON) {
             return;
@@ -71,6 +104,7 @@ public class GameMgr implements Runnable{
         gameInstance.start();
     }
 
+    // Ends game instance.
     public synchronized void endGame() {
         if (!gameON) {
             return;

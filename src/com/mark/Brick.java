@@ -12,6 +12,7 @@ public class Brick {
     protected int x_loc;
     protected int y_loc;
 
+    // Static constant getters.
     public static int getBRICK_WIDTH() { return BRICK_WIDTH; }
     public static int getBRICK_HEIGHT() { return BRICK_HEIGHT; }
 
