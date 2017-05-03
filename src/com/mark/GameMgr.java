@@ -155,6 +155,9 @@ public class GameMgr implements Runnable{
         }
     }
 
+    protected void detectCollisions() {
+
+    }
 
 
 //        this.frame = frame;
