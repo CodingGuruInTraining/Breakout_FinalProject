@@ -1,5 +1,7 @@
 package com.mark;
 
+import java.awt.*;
+
 /**
  * Created by hl4350hb on 5/1/2017.
  */
@@ -9,6 +11,9 @@ public class Brick {
     protected static int BRICK_WIDTH = 40;
     protected static int BRICK_HEIGHT = 10;
 
+    protected static int BOARD_WIDTH;
+    protected static int BOARD_HEIGHT;
+
     protected int x_loc;
     protected int y_loc;
 
@@ -17,12 +22,19 @@ public class Brick {
     public static int getBRICK_HEIGHT() { return BRICK_HEIGHT; }
 
     // Constructor.
-    Brick() {
-
+    Brick(int x, int y, Color color, Graphics g) {
+        this.x_loc = x;
+        this.y_loc = y;
+        g.setColor(color);
+        g.fillRect(this.x_loc, this.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
     }
 
     // Draw/redraw method.
-    protected void draw() {
-
-    }
+//    protected void draw(int x, int y, Color color, Graphics g) {
+//        this.x_loc = x;
+//        this.y_loc = y;
+//
+//        g.setColor(color);
+//        g.fillRect();
+//    }
 }

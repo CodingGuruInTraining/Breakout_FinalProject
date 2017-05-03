@@ -30,6 +30,13 @@ public class GameMgr implements Runnable{
     // Determines speed of redraw.
     protected int fps = 40;
 
+    protected Color[] brickColors = { Color.red, Color.orange, Color.yellow,
+            Color.green, Color.blue, Color.magenta };
+    protected int bricksPerRow;
+    // Can change later on to make more "difficult."
+    protected int rowsOfBricks = 6;
+    protected int brickWidth;
+    protected int brickHeight;
 
     // Constructor.
     public GameMgr() {
@@ -39,6 +46,15 @@ public class GameMgr implements Runnable{
 //        timer = new Timer();
 //        timer.scheduleAtFixedRate(something, 0, 100);
         paddle = new Paddle(BOARD_WIDTH, BOARD_HEIGHT);
+
+        // total guess and it worked!:
+        Brick.BOARD_WIDTH = BOARD_WIDTH;
+        Brick.BOARD_HEIGHT = BOARD_HEIGHT;
+
+        brickWidth = Brick.getBRICK_WIDTH();
+        brickHeight = Brick.getBRICK_HEIGHT();
+        bricksPerRow = BOARD_WIDTH / brickWidth;
+        bricks = new ArrayList<Brick>();
     }
 
     // Run method must be public for some reason.
@@ -90,6 +106,9 @@ public class GameMgr implements Runnable{
     // Init method.
     protected void setupGame() {
         // May not need anymore.
+
+
+//        makeBricks();
     }
 
     // Creates new game instance/thread.
@@ -121,6 +140,18 @@ public class GameMgr implements Runnable{
         }
     }
 
+    protected void makeBricks() {
+        for (int i = 0; i < 1; i++) {       // for num of rows...
+            for (int k = 0; k < bricksPerRow; k++) {    // for bricks in each row...
+                Brick b = new Brick(
+                        (i * brickWidth),       // x coord
+                        (k * brickHeight),      // y coord
+                        brickColors[i],         // color of brick
+                        graphics);
+                bricks.add(b);
+            }
+        }
+    }
 
 
 
