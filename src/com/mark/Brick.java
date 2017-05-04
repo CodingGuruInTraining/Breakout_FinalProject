@@ -12,12 +12,17 @@ public class Brick implements Globals{
     // Defines location variables.
     protected int x_loc;
     protected int y_loc;
+    protected Color color;
 
     // Constructor.
-    Brick(int x, int y, Color color, Graphics g) {
+    Brick(int x, int y, Color color) {
         // Sets Brick's location to the provided coordinates.
         this.x_loc = x;
         this.y_loc = y;
+        this.color = color;
+    }
+
+    protected void draw(Graphics g) {
         // Sets Brick's color and draws rectangle.
         g.setColor(color);
         g.fillRect(this.x_loc, this.y_loc, BRICK_WIDTH, BRICK_HEIGHT);

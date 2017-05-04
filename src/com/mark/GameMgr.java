@@ -44,6 +44,7 @@ public class GameMgr implements Runnable, Globals{
         bricksPerRow = BOARD_WIDTH / BRICK_WIDTH;
         // Creates array to hold all the Brick objects.
         bricks = new ArrayList<Brick>();
+        makeBricks();
     }
 
     // Standard run method that runs the app.
@@ -54,6 +55,10 @@ public class GameMgr implements Runnable, Globals{
         // Makes variable to hold time values down to the nanosecond.
         long currentTime;
         long prevCurrTime = System.nanoTime();
+
+
+//        makeBricks();
+
 
         // Loops until variable value is changed.
         while (gameON) {
@@ -96,7 +101,10 @@ public class GameMgr implements Runnable, Globals{
         // Runs the Ball's draw method.
         ball.draw(graphics);
         // Runs method to draw all active Bricks.
-        makeBricks();           // just using starting point method for now
+//        makeBricks();           // just using starting point method for now
+
+
+        drawBricks();
 
 
         detectCollisions();
@@ -146,12 +154,19 @@ public class GameMgr implements Runnable, Globals{
                 Brick b = new Brick(
                         (k * BRICK_WIDTH),       // x coord
                         (i * BRICK_HEIGHT),      // y coord
-                        brickColors[i],         // color of brick
-                        graphics);
+                        brickColors[i]);         // color of brick
+//                        graphics);
                 bricks.add(b);
             }
         }
     }
+
+    protected void drawBricks() {
+        for (Brick b : bricks) {
+            b.draw(graphics);
+        }
+    }
+
 
     protected void detectCollisions() {
         int ballx = ball.getX();
@@ -162,7 +177,13 @@ public class GameMgr implements Runnable, Globals{
                     ballx + BALL_DIAMETER > b.x_loc &&
                     bally < b.y_loc + BRICK_HEIGHT &&
                     bally + BRICK_HEIGHT > b.y_loc ) {
+
+
+                bricks.remove(b);
+
+
                 System.out.println("collision!");
+                return;
             }
         }
     }

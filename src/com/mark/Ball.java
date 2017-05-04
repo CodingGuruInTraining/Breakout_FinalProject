@@ -16,6 +16,8 @@ public class Ball implements Globals {
     public int getX() { return this.x_loc; }
     public int getY() { return this.y_loc; }
 
+//    public void setX(int ) {}
+
     // Constructor.
     Ball() {
         // Sets the Ball's starting location to 1/3 of window's width
