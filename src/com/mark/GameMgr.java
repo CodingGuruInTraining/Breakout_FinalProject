@@ -98,6 +98,10 @@ public class GameMgr implements Runnable, Globals{
         // Runs method to draw all active Bricks.
         makeBricks();           // just using starting point method for now
 
+
+        detectCollisions();
+
+
         // Finalize process.
         bufferStrategy.show();
         graphics.dispose();
@@ -153,7 +157,13 @@ public class GameMgr implements Runnable, Globals{
         int ballx = ball.getX();
         int bally = ball.getY();
         for (Brick b : bricks) {
-
+// TODO maybe move checks to either Brick or Ball class
+            if (ballx < b.x_loc + BRICK_WIDTH &&
+                    ballx + BALL_DIAMETER > b.x_loc &&
+                    bally < b.y_loc + BRICK_HEIGHT &&
+                    bally + BRICK_HEIGHT > b.y_loc ) {
+                System.out.println("collision!");
+            }
         }
     }
 }
