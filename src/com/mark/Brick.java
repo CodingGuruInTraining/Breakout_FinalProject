@@ -24,7 +24,7 @@ public class Brick implements Globals{
 
     protected void draw(Graphics g) {
         // Sets Brick's color and draws rectangle.
-        g.setColor(color);
+        g.setColor(this.color);
         g.fillRect(this.x_loc, this.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
         // Sets color to black and draws a "border" around Brick.
         g.setColor(black);

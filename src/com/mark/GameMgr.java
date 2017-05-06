@@ -173,8 +173,8 @@ public class GameMgr implements Runnable, Globals{
         int bally = ball.getY();
         for (Brick b : bricks) {
 // TODO maybe move checks to either Brick or Ball class
-            if (ballx < b.x_loc + BRICK_WIDTH &&
-                    ballx + BALL_DIAMETER > b.x_loc &&
+            if (ballx < b.x_loc + BRICK_WIDTH &&                // ball is on LEFT half of brick
+                    ballx + BALL_DIAMETER > b.x_loc &&          // ball passed LEFT side >>>
                     bally < b.y_loc + BRICK_HEIGHT &&
                     bally + BRICK_HEIGHT > b.y_loc ) {
 
