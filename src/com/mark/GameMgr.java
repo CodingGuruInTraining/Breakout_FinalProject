@@ -162,8 +162,10 @@ public class GameMgr implements Runnable, Globals{
     }
 
     protected void drawBricks() {
+        int ballX = ball.getX();
+        int ballY = ball.getY();
         for (Brick b : bricks) {
-            b.draw(graphics);
+            b.draw(graphics, ballX, ballY);
         }
     }
 

@@ -13,6 +13,11 @@ public class Ball implements Globals {
     protected int y_spd;
 
 
+
+//    protected
+
+
+
     protected int brickX;
     protected int brickY;
     protected boolean brickHit = false;
