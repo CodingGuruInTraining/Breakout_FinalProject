@@ -40,7 +40,7 @@ public class Ball implements Globals {
         this.x_loc = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
         this.y_loc = ((BOARD_HEIGHT / 2) - (BALL_DIAMETER / 2));
         this.x_spd = 1;
-        this.y_spd = 2;
+        this.y_spd = -1;
     }
 
     // Draw/redraw method.
@@ -53,10 +53,10 @@ public class Ball implements Globals {
         g.fillOval(this.x_loc, this.y_loc, BALL_DIAMETER, BALL_DIAMETER);
         // Runs wall collision detecting method.
         // May be replaced with a global method later on.
-        changeTrajectory();
+        changeDirectionHitWall();
     }
 
-    protected void changeTrajectory() {
+    protected void changeDirectionHitWall() {
         // Checks if the Ball is at the left wall.
         if (this.x_loc <= 0 && this.y_loc > 0) {
             this.x_spd *= -1;
@@ -94,5 +94,44 @@ public class Ball implements Globals {
 //        }
 
 
+    }
+
+    protected void changeDirectionHitBrick(Brick b) {
+        int radius = BALL_DIAMETER / 2;
+
+        if (((this.x_loc + radius) >= b.x_loc) || ((this.x_loc - radius) <= (b.x_loc + BRICK_WIDTH))) {
+            this.x_spd *= -1;
+            System.out.println("changed x spd");
+        }
+
+        if (((this.y_loc - radius) >= (b.y_loc + BRICK_HEIGHT)) || ((this.y_loc + radius) <= b.y_loc)) {
+            this.y_spd *= -1;
+            System.out.println("changed y spd");
+        }
+//        http://stackoverflow.com/questions/1561538/ball-and-brick-collision-handling?rq=1
+
+
+
+
+
+//        if ((this.x_loc + BALL_DIAMETER) < (b.x_loc + BRICK_WIDTH)) {
+//            // NOT right side
+//        }
+//        if (this.x_loc > b.x_loc) {
+//            // NOT left side
+//        }
+//        if (this.y_loc > b.y_loc) {
+//            // NOT bottom
+//        }
+//        if ((this.y_loc + BALL_DIAMETER) > (b.y_loc + BRICK_HEIGHT)) {
+//            // NOT top
+//        }
+//
+//
+//
+//
+//        if (this.x_spd > 0) {           // Moving right
+//            if (this.y_loc )
+//        }
     }
 }

@@ -162,10 +162,10 @@ public class GameMgr implements Runnable, Globals{
     }
 
     protected void drawBricks() {
-        int ballX = ball.getX();
-        int ballY = ball.getY();
+//        int ballX = ball.getX();
+//        int ballY = ball.getY();
         for (Brick b : bricks) {
-            b.draw(graphics, ballX, ballY);
+            b.draw(graphics);
         }
     }
 
@@ -179,6 +179,9 @@ public class GameMgr implements Runnable, Globals{
                     ballx + BALL_DIAMETER > b.x_loc &&          // ball passed LEFT side >>>
                     bally < b.y_loc + BRICK_HEIGHT &&
                     bally + BRICK_HEIGHT > b.y_loc ) {
+
+
+                ball.changeDirectionHitBrick(b);
 
 
                 bricks.remove(b);

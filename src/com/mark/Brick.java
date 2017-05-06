@@ -16,10 +16,10 @@ public class Brick implements Globals{
 
 
 
-    protected boolean leftHit = false;
-    protected boolean rightHit = false;
-    protected boolean topHit = false;
-    protected boolean botHit = false;
+//    protected boolean leftHit = false;
+//    protected boolean rightHit = false;
+//    protected boolean topHit = false;
+//    protected boolean botHit = false;
 
 
 
@@ -31,7 +31,7 @@ public class Brick implements Globals{
         this.color = color;
     }
 
-    protected void draw(Graphics g, int ballX, int ballY) {
+    protected void draw(Graphics g) {
         // Sets Brick's color and draws rectangle.
         g.setColor(this.color);
         g.fillRect(this.x_loc, this.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
@@ -39,15 +39,15 @@ public class Brick implements Globals{
         g.setColor(black);
         g.drawRect(this.x_loc, this.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
 
-        trackBall(ballX, ballY);
+//        trackBall(ballX, ballY);
     }
 
-    protected void trackBall(int ballX, int ballY) {
-        if (leftHit) {
-            // Ball is at or passed right side
-            if ((ballX + BALL_DIAMETER) >= (this.x_loc + BRICK_WIDTH)) {
-                leftHit = false;
-            }
-        }
-    }
+//    protected void trackBall(int ballX, int ballY) {
+//        if (leftHit) {
+//            // Ball is at or passed right side
+//            if ((ballX + BALL_DIAMETER) >= (this.x_loc + BRICK_WIDTH)) {
+//                leftHit = false;
+//            }
+//        }
+//    }
 }
