@@ -99,7 +99,7 @@ public class GameMgr implements Runnable, Globals{
         // integer comes from the game frame's keypressed event.
         paddle.draw(gameFrame.getMoveDirection(), graphics);
         // Runs the Ball's draw method.
-        ball.draw(graphics);
+        ball.draw(paddle.getX_loc(), paddle.getY_loc(), graphics);
         // Runs method to draw all active Bricks.
 //        makeBricks();           // just using starting point method for now
 
@@ -177,7 +177,7 @@ public class GameMgr implements Runnable, Globals{
 // TODO maybe move checks to either Brick or Ball class
 
 
-            Rectangle ballRect = new Rectangle(ball.x_loc, ball.y_loc, BALL_DIAMETER, BALL_DIAMETER);
+            Rectangle ballRect = new Rectangle(ballx, bally, BALL_DIAMETER, BALL_DIAMETER);
             Rectangle brickRect = new Rectangle(b.x_loc, b.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
 
             if (ballRect.intersects(brickRect)) {

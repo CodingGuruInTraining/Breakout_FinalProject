@@ -40,11 +40,11 @@ public class Ball implements Globals {
         this.x_loc = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
         this.y_loc = ((BOARD_HEIGHT / 2) - (BALL_DIAMETER / 2));
         this.x_spd = 1;
-        this.y_spd = -3;
+        this.y_spd = 2;
     }
 
     // Draw/redraw method.
-    protected void draw(Graphics g) {
+    protected void draw(int paddleX, int paddleY, Graphics g) {
         // Adds the current speeds to the Ball's current location.
         this.x_loc += this.x_spd;
         this.y_loc += this.y_spd;
@@ -53,10 +53,10 @@ public class Ball implements Globals {
         g.fillOval(this.x_loc, this.y_loc, BALL_DIAMETER, BALL_DIAMETER);
         // Runs wall collision detecting method.
         // May be replaced with a global method later on.
-        changeDirectionHitWall();
+        changeDirectionHitWall(paddleX, paddleY);
     }
 
-    protected void changeDirectionHitWall() {
+    protected void changeDirectionHitWall(int paddleX, int paddleY) {
         // Checks if the Ball is at the left wall.
         if (this.x_loc <= 0 && this.y_loc > 0) {
             this.x_spd *= -1;
@@ -69,10 +69,16 @@ public class Ball implements Globals {
         else if (this.y_loc <= 0 && this.x_loc > 0) {
             this.y_spd *= -1;
         }
-
-// just for testing purposes
+// TODO this will be game over at some point
         else if (this.y_loc >= (BOARD_HEIGHT - BALL_DIAMETER) && this.x_loc > 0) {
             this.y_spd *= -1;
+        }
+
+
+        if ((this.y_loc + BALL_DIAMETER) >= paddleY) {
+            if ((this.x_loc >= paddleX) && ((this.x_loc + BALL_DIAMETER) <= (paddleX + PADDLE_WIDTH))) {
+                this.y_spd *= -1;
+            }
         }
 
 

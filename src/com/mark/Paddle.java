@@ -47,7 +47,6 @@ public class Paddle implements Globals{
         if (this.x_loc + PADDLE_WIDTH > this.BOARD_WIDTH) {
             this.x_loc = this.BOARD_WIDTH - this.PADDLE_WIDTH;
         }
-
         g.setColor(Color.white);
         g.fillRect(this.x_loc, this.y_loc, PADDLE_WIDTH, PADDLE_HEIGHT);
     }
