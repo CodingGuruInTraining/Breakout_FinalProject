@@ -75,8 +75,10 @@ public class Ball implements Globals {
         }
 
 
+        int radius = BALL_DIAMETER / 2;
         if ((this.y_loc + BALL_DIAMETER) >= paddleY) {
-            if ((this.x_loc >= paddleX) && ((this.x_loc + BALL_DIAMETER) <= (paddleX + PADDLE_WIDTH))) {
+            if (((this.x_loc + radius) >= paddleX) &&
+                    ((this.x_loc + BALL_DIAMETER) <= (paddleX + PADDLE_WIDTH) + radius)) {
                 this.y_spd *= -1;
             }
         }
