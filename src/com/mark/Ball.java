@@ -96,9 +96,30 @@ public class Ball implements Globals {
 
     }
 
-    protected void changeDirectionHitBrick(Brick b) {
+    protected void changeDirectionHitBrick(int xoverlap, int yoverlap) { //Brick b) {
 
-        this.y_spd *= -1;
+//        this.y_spd *= -1;
+
+//        if (this.y_spd > 0) {       // DOWN
+//
+//        }
+//        else if (this.y_spd < 0) {  // UP
+//
+//        }
+
+
+
+
+        if (xoverlap == yoverlap) {
+            this.x_spd *= -1;
+            this.y_spd *= -1;
+        }
+        else if (xoverlap < yoverlap) {
+            this.x_spd *= -1;
+        }
+        else {
+            this.y_spd *= -1;
+        }
 
 
 

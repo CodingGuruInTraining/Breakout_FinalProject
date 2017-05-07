@@ -175,21 +175,53 @@ public class GameMgr implements Runnable, Globals{
         int bally = ball.getY();
         for (Brick b : bricks) {
 // TODO maybe move checks to either Brick or Ball class
-            if (ballx < b.x_loc + BRICK_WIDTH &&                // ball is on LEFT half of brick
-                    ballx + BALL_DIAMETER > b.x_loc &&          // ball passed LEFT side >>>
-                    bally < b.y_loc + BRICK_HEIGHT &&
-                    bally + BRICK_HEIGHT > b.y_loc ) {
 
 
-                ball.changeDirectionHitBrick(b);
+            Rectangle ballRect = new Rectangle(ball.x_loc, ball.y_loc, BALL_DIAMETER, BALL_DIAMETER);
+            Rectangle brickRect = new Rectangle(b.x_loc, b.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
 
+            if (ballRect.intersects(brickRect)) {
+                int xoverlap;
+                int yoverlap;
 
+                if (ballRect.getCenterX() < brickRect.getCenterX()) {
+                    xoverlap = (ballx + BALL_DIAMETER) - b.x_loc;
+                }
+                else {
+                    xoverlap = (b.x_loc + BRICK_WIDTH) - ballx;
+                }
+
+                if (ballRect.getCenterY() < brickRect.getCenterY()) {
+                    yoverlap = (bally + BALL_DIAMETER) - b.y_loc;
+                }
+                else {
+                    yoverlap = (b.y_loc + BRICK_HEIGHT) - bally;
+                }
+
+                ball.changeDirectionHitBrick(xoverlap, yoverlap);
                 bricks.remove(b);
-
-
-                System.out.println("collision!");
                 return;
             }
+//            http://stackoverflow.com/questions/19408458/brickbreaker-clone-ball-brick-collision-and-ball-behavior-on-brick-collision
+
+
+
+
+//            if (ballx < b.x_loc + BRICK_WIDTH &&                // ball is on LEFT half of brick
+//                    ballx + BALL_DIAMETER > b.x_loc &&          // ball passed LEFT side >>>
+//                    bally < b.y_loc + BRICK_HEIGHT &&
+//                    bally + BRICK_HEIGHT > b.y_loc ) {
+//
+//
+//                ball.changeDirectionHitBrick(b);
+//
+//
+//                bricks.remove(b);
+//
+//
+//                System.out.println("collision!");
+//                return;
+//            }
         }
     }
 }
