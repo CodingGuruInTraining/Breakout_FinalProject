@@ -11,8 +11,8 @@ public interface Globals {
     public static final int BRICK_WIDTH = 100;
     public static final int BRICK_HEIGHT = 20;
     public static final int BALL_DIAMETER = 20;
-//    public static final int
-//    public static final int
+    public static final int STATS_WIDTH = BOARD_WIDTH;
+    public static final int STATS_HEIGHT = 30;
 //    public static final int
 //    public static final int
 

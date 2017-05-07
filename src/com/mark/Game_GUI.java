@@ -24,13 +24,13 @@ public class Game_GUI implements KeyListener, Globals {
     // Constructor.
     public Game_GUI() {
         frame = new JFrame("Breakout Attempt");
-        frame.setSize(BOARD_WIDTH, BOARD_HEIGHT);
+        frame.setSize(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(true);
 
         canvas = new Canvas();
-        canvas.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+        canvas.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
         frame.add(canvas);
         frame.addKeyListener(this);
         frame.pack();
@@ -38,7 +38,7 @@ public class Game_GUI implements KeyListener, Globals {
 
     protected void draw(Graphics g) {
         g.setColor(Color.black);
-        g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+        g.fillRect(0, STATS_HEIGHT, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
     }
 
     @Override

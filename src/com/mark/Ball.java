@@ -38,7 +38,7 @@ public class Ball implements Globals {
         // Sets the Ball's starting location to 1/3 of window's width
         // and 1/2 of window's height.
         this.x_loc = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
-        this.y_loc = ((BOARD_HEIGHT / 2) - (BALL_DIAMETER / 2));
+        this.y_loc = (((BOARD_HEIGHT + STATS_HEIGHT) / 2) - (BALL_DIAMETER / 2));
         this.x_spd = 1;
         this.y_spd = 2;
     }
@@ -58,19 +58,19 @@ public class Ball implements Globals {
 
     protected void changeDirectionHitWall(int paddleX, int paddleY) {
         // Checks if the Ball is at the left wall.
-        if (this.x_loc <= 0 && this.y_loc > 0) {
+        if (this.x_loc <= 0 && this.y_loc > STATS_HEIGHT) {
             this.x_spd *= -1;
         }
         // Checks if the Ball is at the right wall.
-        else if (this.x_loc >= (BOARD_WIDTH - BALL_DIAMETER) && this.y_loc > 0) {
+        else if (this.x_loc >= (BOARD_WIDTH - BALL_DIAMETER) && this.y_loc > STATS_HEIGHT) {
             this.x_spd *= -1;
         }
         // Checks if the Ball is at the top wall.
-        else if (this.y_loc <= 0 && this.x_loc > 0) {
+        else if (this.y_loc <= STATS_HEIGHT && this.x_loc > 0) {
             this.y_spd *= -1;
         }
 // TODO this will be game over at some point
-        else if (this.y_loc >= (BOARD_HEIGHT - BALL_DIAMETER) && this.x_loc > 0) {
+        else if (this.y_loc >= ((BOARD_HEIGHT + STATS_HEIGHT) - BALL_DIAMETER) && this.x_loc > 0) {
             this.y_spd *= -1;
         }
 

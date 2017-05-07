@@ -26,7 +26,7 @@ public class Paddle implements Globals{
     // Constructor.
     Paddle() {
         this.x_loc = ((BOARD_WIDTH/2) - (PADDLE_WIDTH/2));
-        this.y_loc = (BOARD_HEIGHT - (2*PADDLE_HEIGHT));
+        this.y_loc = ((BOARD_HEIGHT + STATS_HEIGHT) - (2*PADDLE_HEIGHT));
 //        this.BOARD_WIDTH = boardWidth;
 //        this.BOARD_HEIGHT = boardHeight;
         System.out.println("Starting at " + this.x_loc + ", " + this.y_loc);

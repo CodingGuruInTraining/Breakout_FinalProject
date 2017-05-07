@@ -91,7 +91,7 @@ public class GameMgr implements Runnable, Globals{
         // Makes graphics object for drawing.
         graphics = bufferStrategy.getDrawGraphics();
         // Clears board.
-        graphics.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+        graphics.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
 
         // Runs background draw method.
         gameFrame.draw(graphics);
@@ -153,7 +153,7 @@ public class GameMgr implements Runnable, Globals{
             for (int k = 0; k < bricksPerRow; k++) {    // for bricks in each row...
                 Brick b = new Brick(
                         (k * BRICK_WIDTH),       // x coord
-                        (i * BRICK_HEIGHT),      // y coord
+                        ((i * BRICK_HEIGHT) + STATS_HEIGHT),      // y coord
                         brickColors[i]);         // color of brick
 //                        graphics);
                 bricks.add(b);
