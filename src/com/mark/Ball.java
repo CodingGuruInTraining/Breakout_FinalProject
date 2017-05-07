@@ -40,7 +40,7 @@ public class Ball implements Globals {
         this.x_loc = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
         this.y_loc = ((BOARD_HEIGHT / 2) - (BALL_DIAMETER / 2));
         this.x_spd = 1;
-        this.y_spd = -1;
+        this.y_spd = -3;
     }
 
     // Draw/redraw method.
@@ -97,17 +97,24 @@ public class Ball implements Globals {
     }
 
     protected void changeDirectionHitBrick(Brick b) {
-        int radius = BALL_DIAMETER / 2;
 
-        if (((this.x_loc + radius) >= b.x_loc) || ((this.x_loc - radius) <= (b.x_loc + BRICK_WIDTH))) {
-            this.x_spd *= -1;
-            System.out.println("changed x spd");
-        }
+        this.y_spd *= -1;
 
-        if (((this.y_loc - radius) >= (b.y_loc + BRICK_HEIGHT)) || ((this.y_loc + radius) <= b.y_loc)) {
-            this.y_spd *= -1;
-            System.out.println("changed y spd");
-        }
+
+
+
+
+        //        int radius = BALL_DIAMETER / 2;
+//
+//        if (((this.x_loc + radius) >= b.x_loc) || ((this.x_loc - radius) <= (b.x_loc + BRICK_WIDTH))) {
+//            this.x_spd *= -1;
+//            System.out.println("changed x spd");
+//        }
+//
+//        if (((this.y_loc - radius) >= (b.y_loc + BRICK_HEIGHT)) || ((this.y_loc + radius) <= b.y_loc)) {
+//            this.y_spd *= -1;
+//            System.out.println("changed y spd");
+//        }
 //        http://stackoverflow.com/questions/1561538/ball-and-brick-collision-handling?rq=1
 
 
