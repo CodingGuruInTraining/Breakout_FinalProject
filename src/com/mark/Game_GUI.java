@@ -11,7 +11,9 @@ import java.awt.event.KeyListener;
 public class Game_GUI implements KeyListener, Globals {
     private JFrame frame;
     private Canvas canvas;
-
+    private JLabel scoreLabel;
+    private JLabel timeLabel;
+    private JLabel livesLabel;
 
     protected int moveDirection = 0;
 
@@ -29,16 +31,26 @@ public class Game_GUI implements KeyListener, Globals {
         frame.setResizable(false);
         frame.setVisible(true);
 
+
         canvas = new Canvas();
         canvas.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
         frame.add(canvas);
         frame.addKeyListener(this);
+
+//        frame.add(scoreLabel);
+//        frame.add(timeLabel);
+//        frame.add(livesLabel);
+//        scoreLabel.setText("Score: ");
+//        timeLabel.setText("no label");
+//        livesLabel.setText("Lives: ");
+
         frame.pack();
+
     }
 
     protected void draw(Graphics g) {
         g.setColor(Color.black);
-        g.fillRect(0, STATS_HEIGHT, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
+        g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
     }
 
     @Override
