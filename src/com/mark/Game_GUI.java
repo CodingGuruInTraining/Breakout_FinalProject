@@ -32,6 +32,7 @@ public class Game_GUI implements KeyListener, Globals {
         frame.setVisible(true);
 
 
+
         canvas = new Canvas();
         canvas.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
         frame.add(canvas);
@@ -39,11 +40,12 @@ public class Game_GUI implements KeyListener, Globals {
         frame.pack();
 
 // TODO add statics to interface class.
-        scoreLabel = new JLabel();
+
+        scoreLabel = new JLabel("score");
         timeLabel = new JLabel();
         livesLabel = new JLabel();
-
-
+        scoreLabel.setForeground(Color.white);
+//        scoreLabel.setText("somethin");
         int interval = STATS_WIDTH / 7;
         scoreLabel.setLocation(0,0);
         timeLabel.setLocation(interval * 2, 0);
@@ -56,7 +58,7 @@ public class Game_GUI implements KeyListener, Globals {
         frame.add(scoreLabel);
         frame.add(timeLabel);
         frame.add(livesLabel);
-
+        System.out.println(scoreLabel.getText());
 frame.setLocationRelativeTo(null);
     }
 
@@ -68,29 +70,29 @@ frame.setLocationRelativeTo(null);
 
     protected void drawScoreboard() {
 
-        scoreLabel = new JLabel();
-        timeLabel = new JLabel();
-        livesLabel = new JLabel();
-        scoreLabel.setForeground(Color.white);
-        timeLabel.setForeground(Color.white);
-        livesLabel.setForeground(Color.white);
-        int interval = STATS_WIDTH / 7;
-        scoreLabel.setLocation(0,0);
-        timeLabel.setLocation(interval * 2, 0);
-        livesLabel.setLocation(interval * 4, 0);
-
-        scoreLabel.setSize(new Dimension(25, STATS_HEIGHT));
-        timeLabel.setSize(40, STATS_HEIGHT);
-        livesLabel.setSize(40, STATS_HEIGHT);
-
-        scoreLabel.setText("Score: ");
-        timeLabel.setText("no label");
-        livesLabel.setText("Lives: ");
-        scoreLabel.setVisible(true);
+//        scoreLabel = new JLabel();
+//        timeLabel = new JLabel();
+//        livesLabel = new JLabel();
+//        scoreLabel.setForeground(Color.white);
+//        timeLabel.setForeground(Color.white);
+//        livesLabel.setForeground(Color.white);
+//        int interval = STATS_WIDTH / 7;
+//        scoreLabel.setLocation(0,0);
+//        timeLabel.setLocation(interval * 2, 0);
+//        livesLabel.setLocation(interval * 4, 0);
+//
+//        scoreLabel.setSize(new Dimension(25, STATS_HEIGHT));
+//        timeLabel.setSize(40, STATS_HEIGHT);
+//        livesLabel.setSize(40, STATS_HEIGHT);
+//
+//        scoreLabel.setText("Score: ");
+//        timeLabel.setText("no label");
+//        livesLabel.setText("Lives: ");
+//        scoreLabel.setVisible(true);
 //        System.out.println(scoreLabel.getText());
-        frame.add(scoreLabel);
-        frame.add(timeLabel);
-        frame.add(livesLabel);
+//        frame.add(scoreLabel);
+//        frame.add(timeLabel);
+//        frame.add(livesLabel);
 
 
     }
