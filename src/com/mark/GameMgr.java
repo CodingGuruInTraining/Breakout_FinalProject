@@ -98,7 +98,7 @@ public class GameMgr implements Runnable, Globals{
         // Makes graphics object for drawing.
         graphics = bufferStrategy.getDrawGraphics();
         // Clears board.
-        graphics.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
+        graphics.clearRect(0, STATS_HEIGHT, BOARD_WIDTH, BOARD_HEIGHT);
 
         // Runs background draw method.
         gameFrame.draw(graphics);
@@ -208,6 +208,7 @@ public class GameMgr implements Runnable, Globals{
                 ball.changeDirectionHitBrick(xoverlap, yoverlap);
                 bricks.remove(b);
                 score += pointsPerHit;
+                System.out.println(score);
                 return;
             }
 //            http://stackoverflow.com/questions/19408458/brickbreaker-clone-ball-brick-collision-and-ball-behavior-on-brick-collision

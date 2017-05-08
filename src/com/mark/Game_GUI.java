@@ -36,17 +36,19 @@ public class Game_GUI implements KeyListener, Globals {
         canvas.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
         frame.add(canvas);
         frame.addKeyListener(this);
+        frame.pack();
 
-        scoreLabel = new JLabel("Score: ");
-        timeLabel = new JLabel("no label");
-        livesLabel = new JLabel("Lives: ");
+// TODO add statics to interface class.
+        scoreLabel = new JLabel();
+        timeLabel = new JLabel();
+        livesLabel = new JLabel();
 
 
         int interval = STATS_WIDTH / 7;
         scoreLabel.setLocation(0,0);
         timeLabel.setLocation(interval * 2, 0);
         livesLabel.setLocation(interval * 4, 0);
-        frame.pack();
+
         scoreLabel.setSize(40, STATS_HEIGHT);
         timeLabel.setSize(40, STATS_HEIGHT);
         livesLabel.setSize(40, STATS_HEIGHT);
@@ -61,6 +63,36 @@ frame.setLocationRelativeTo(null);
     protected void draw(Graphics g) {
         g.setColor(Color.black);
         g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
+        drawScoreboard();
+    }
+
+    protected void drawScoreboard() {
+
+        scoreLabel = new JLabel();
+        timeLabel = new JLabel();
+        livesLabel = new JLabel();
+        scoreLabel.setForeground(Color.white);
+        timeLabel.setForeground(Color.white);
+        livesLabel.setForeground(Color.white);
+        int interval = STATS_WIDTH / 7;
+        scoreLabel.setLocation(0,0);
+        timeLabel.setLocation(interval * 2, 0);
+        livesLabel.setLocation(interval * 4, 0);
+
+        scoreLabel.setSize(new Dimension(25, STATS_HEIGHT));
+        timeLabel.setSize(40, STATS_HEIGHT);
+        livesLabel.setSize(40, STATS_HEIGHT);
+
+        scoreLabel.setText("Score: ");
+        timeLabel.setText("no label");
+        livesLabel.setText("Lives: ");
+        scoreLabel.setVisible(true);
+//        System.out.println(scoreLabel.getText());
+        frame.add(scoreLabel);
+        frame.add(timeLabel);
+        frame.add(livesLabel);
+
+
     }
 
     @Override
