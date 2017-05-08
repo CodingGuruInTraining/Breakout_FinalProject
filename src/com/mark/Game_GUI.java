@@ -37,15 +37,25 @@ public class Game_GUI implements KeyListener, Globals {
         frame.add(canvas);
         frame.addKeyListener(this);
 
-//        frame.add(scoreLabel);
-//        frame.add(timeLabel);
-//        frame.add(livesLabel);
-//        scoreLabel.setText("Score: ");
-//        timeLabel.setText("no label");
-//        livesLabel.setText("Lives: ");
+        scoreLabel = new JLabel("Score: ");
+        timeLabel = new JLabel("no label");
+        livesLabel = new JLabel("Lives: ");
 
+
+        int interval = STATS_WIDTH / 7;
+        scoreLabel.setLocation(0,0);
+        timeLabel.setLocation(interval * 2, 0);
+        livesLabel.setLocation(interval * 4, 0);
         frame.pack();
+        scoreLabel.setSize(40, STATS_HEIGHT);
+        timeLabel.setSize(40, STATS_HEIGHT);
+        livesLabel.setSize(40, STATS_HEIGHT);
 
+        frame.add(scoreLabel);
+        frame.add(timeLabel);
+        frame.add(livesLabel);
+
+frame.setLocationRelativeTo(null);
     }
 
     protected void draw(Graphics g) {

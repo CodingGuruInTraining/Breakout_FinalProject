@@ -32,6 +32,13 @@ public class GameMgr implements Runnable, Globals{
     // Can change later on to make more "difficult."
     protected int rowsOfBricks = 6;
 
+// TODO consider making a score class.
+// TODO add static values to interface class.
+    protected int score = 0;
+    protected int pointsPerHit = 20;
+    protected int lives = 3;
+
+
     // Constructor.
     public GameMgr() {
         // Instantiates single objects.
@@ -200,6 +207,7 @@ public class GameMgr implements Runnable, Globals{
 
                 ball.changeDirectionHitBrick(xoverlap, yoverlap);
                 bricks.remove(b);
+                score += pointsPerHit;
                 return;
             }
 //            http://stackoverflow.com/questions/19408458/brickbreaker-clone-ball-brick-collision-and-ball-behavior-on-brick-collision
