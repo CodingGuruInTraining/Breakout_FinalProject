@@ -124,6 +124,8 @@ public class GameMgr implements Runnable, Globals{
 
         // Runs background draw method.
         gameFrame.draw(graphics);
+        gameFrame.drawScoreboard(score, timeInGame, lives);
+
         // Runs the Paddle's draw method and passes an integer. The
         // integer comes from the game frame's keypressed event.
         paddle.draw(gameFrame.getMoveDirection(), graphics);

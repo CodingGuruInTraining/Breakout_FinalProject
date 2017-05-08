@@ -77,10 +77,28 @@ frame.setLocationRelativeTo(null);
     protected void draw(Graphics g) {
         g.setColor(Color.black);
         g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
-        drawScoreboard();
+//        drawScoreboard();
     }
 
-    protected void drawScoreboard() {
+    protected void drawScoreboard(int score, int time, int lives) {
+        scoreLabel.setForeground(Color.white);
+        timeLabel.setForeground(Color.white);
+        livesLabel.setForeground(Color.white);
+
+        scoreLabel.setText("Score: " + score);
+        livesLabel.setText("Lives: " + lives);
+        String timeTxt = "";
+        if (time >= 60) {
+            int hours = time / 60;
+            int minutes = time % 60;
+            timeTxt = hours + ":" + minutes;
+        }
+        else {
+            timeTxt = time + "";
+        }
+        timeLabel.setText(timeTxt);
+
+
 
 //        scoreLabel = new JLabel();
 //        timeLabel = new JLabel();
