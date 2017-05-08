@@ -65,7 +65,7 @@ public class GameMgr implements Runnable, Globals{
             @Override
             public void run() {
                 timeInGame += 1;
-                System.out.println(timeInGame);
+//                System.out.println(timeInGame);
             }
         },0,1000);
 
@@ -131,6 +131,16 @@ public class GameMgr implements Runnable, Globals{
         paddle.draw(gameFrame.getMoveDirection(), graphics);
         // Runs the Ball's draw method.
         ball.draw(paddle.getX_loc(), paddle.getY_loc(), graphics);
+
+
+
+        if (!ball.getFloorHit()) {
+            lives--;
+            ball.resetBall();
+        }
+
+
+
         // Runs method to draw all active Bricks.
 //        makeBricks();           // just using starting point method for now
 

@@ -22,11 +22,14 @@ public class Ball implements Globals {
     protected int brickY;
     protected boolean brickHit = false;
 
+    protected boolean floorHit = false;
 
 
     // Getters.
     public int getX() { return this.x_loc; }
     public int getY() { return this.y_loc; }
+    public boolean getFloorHit() { return this.floorHit; }
+    public void setFloorHit(boolean changeIt) { this.floorHit = changeIt; }
 
     // Temporary Brick Setters.
     public void setBrickX(int brickX) { this.brickX = brickX; }
@@ -39,8 +42,8 @@ public class Ball implements Globals {
         // and 1/2 of window's height.
         this.x_loc = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
         this.y_loc = (((BOARD_HEIGHT + STATS_HEIGHT) / 2) - (BALL_DIAMETER / 2));
-        this.x_spd = 1;
-        this.y_spd = 2;
+        this.x_spd = 2;
+        this.y_spd = 3;
     }
 
     // Draw/redraw method.
@@ -71,7 +74,10 @@ public class Ball implements Globals {
         }
 // TODO this will be game over at some point
         else if (this.y_loc >= ((BOARD_HEIGHT + STATS_HEIGHT) - BALL_DIAMETER) && this.x_loc > 0) {
-            this.y_spd *= -1;
+            this.floorHit = true;
+//            resetBall();
+//            return;
+//            this.y_spd *= -1;
         }
 
 
@@ -102,6 +108,10 @@ public class Ball implements Globals {
 //        }
 
 
+    }
+
+    protected void resetBall() {
+// TODO add starting variables for x, y, and their speeds
     }
 
     protected void changeDirectionHitBrick(int xoverlap, int yoverlap) { //Brick b) {
