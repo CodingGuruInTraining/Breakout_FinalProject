@@ -1,9 +1,12 @@
 package com.mark;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * This Class outlines the design for a Game Manager object,
@@ -37,6 +40,9 @@ public class GameMgr implements Runnable, Globals{
     protected int score = 0;
     protected int pointsPerHit = 20;
     protected int lives = 3;
+    protected int timeInGame = 0;
+    Timer gameTime;
+
 
 
     // Constructor.
@@ -52,7 +58,23 @@ public class GameMgr implements Runnable, Globals{
         // Creates array to hold all the Brick objects.
         bricks = new ArrayList<Brick>();
         makeBricks();
+
+
+        gameTime = new Timer();
+        gameTime.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timeInGame += 1;
+                System.out.println(timeInGame);
+            }
+        },0,1000);
+
+
+
     }
+
+
+
 
     // Standard run method that runs the app.
     public void run() {
@@ -241,3 +263,7 @@ public class GameMgr implements Runnable, Globals{
 // Learned a lot about game structures from the tutorial linked below. This app's structure was adapted
 // from the lessons learned.
 //https://www.youtube.com/watch?v=lf9awz6j88Q&list=PLah6faXAgguMnTBs3JnEJY0shAc18XYQZ&index=2
+
+// Timer help:
+//http://stackoverflow.com/questions/14454063/how-to-make-a-timer
+

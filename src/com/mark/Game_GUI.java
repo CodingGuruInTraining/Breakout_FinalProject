@@ -2,8 +2,12 @@ package com.mark;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.*;
+import java.util.Timer;
 
 /**
  * This Class outlines the design for the GUI object.
@@ -23,6 +27,8 @@ public class Game_GUI implements KeyListener, Globals {
     }
     public int getMoveDirection() { return moveDirection; }
 
+
+
     // Constructor.
     public Game_GUI() {
         frame = new JFrame("Breakout Attempt");
@@ -39,13 +45,19 @@ public class Game_GUI implements KeyListener, Globals {
         frame.addKeyListener(this);
         frame.pack();
 
+
+
+
+
+
+
 // TODO add statics to interface class.
 
         scoreLabel = new JLabel("score");
         timeLabel = new JLabel();
         livesLabel = new JLabel();
         scoreLabel.setForeground(Color.white);
-//        scoreLabel.setText("somethin");
+        scoreLabel.setText("somethin");
         int interval = STATS_WIDTH / 7;
         scoreLabel.setLocation(0,0);
         timeLabel.setLocation(interval * 2, 0);
@@ -55,7 +67,7 @@ public class Game_GUI implements KeyListener, Globals {
         timeLabel.setSize(40, STATS_HEIGHT);
         livesLabel.setSize(40, STATS_HEIGHT);
 
-        frame.add(scoreLabel);
+        frame.getContentPane().add(scoreLabel);
         frame.add(timeLabel);
         frame.add(livesLabel);
         System.out.println(scoreLabel.getText());
