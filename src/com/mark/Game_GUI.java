@@ -15,9 +15,9 @@ import java.util.Timer;
 public class Game_GUI implements KeyListener, Globals {
     private JFrame frame;
     private Canvas canvas;
-    private JLabel scoreLabel;
-    private JLabel timeLabel;
-    private JLabel livesLabel;
+//    private JLabel scoreLabel;
+//    private JLabel timeLabel;
+//    private JLabel livesLabel;
 
     protected int moveDirection = 0;
 
@@ -44,7 +44,7 @@ public class Game_GUI implements KeyListener, Globals {
         frame.add(canvas);
         frame.addKeyListener(this);
         frame.pack();
-
+        frame.setLocationRelativeTo(null);
 
 
 
@@ -53,25 +53,25 @@ public class Game_GUI implements KeyListener, Globals {
 
 // TODO add statics to interface class.
 
-        scoreLabel = new JLabel("score");
-        timeLabel = new JLabel();
-        livesLabel = new JLabel();
-        scoreLabel.setForeground(Color.white);
-        scoreLabel.setText("somethin");
-        int interval = STATS_WIDTH / 7;
-        scoreLabel.setLocation(0,0);
-        timeLabel.setLocation(interval * 2, 0);
-        livesLabel.setLocation(interval * 4, 0);
+//        scoreLabel = new JLabel("score");
+//        timeLabel = new JLabel();
+//        livesLabel = new JLabel();
+//        scoreLabel.setForeground(Color.white);
+//        scoreLabel.setText("somethin");
+//        int interval = STATS_WIDTH / 7;
+//        scoreLabel.setLocation(0,0);
+//        timeLabel.setLocation(interval * 2, 0);
+//        livesLabel.setLocation(interval * 4, 0);
+//
+//        scoreLabel.setSize(40, STATS_HEIGHT);
+//        timeLabel.setSize(40, STATS_HEIGHT);
+//        livesLabel.setSize(40, STATS_HEIGHT);
+//
+//        frame.getContentPane().add(scoreLabel);
+//        frame.add(timeLabel);
+//        frame.add(livesLabel);
+//        System.out.println(scoreLabel.getText());
 
-        scoreLabel.setSize(40, STATS_HEIGHT);
-        timeLabel.setSize(40, STATS_HEIGHT);
-        livesLabel.setSize(40, STATS_HEIGHT);
-
-        frame.getContentPane().add(scoreLabel);
-        frame.add(timeLabel);
-        frame.add(livesLabel);
-        System.out.println(scoreLabel.getText());
-frame.setLocationRelativeTo(null);
     }
 
     protected void draw(Graphics g) {
@@ -80,14 +80,22 @@ frame.setLocationRelativeTo(null);
 //        drawScoreboard();
     }
 
-    protected void drawScoreboard(int score, int time, int lives) {
-        scoreLabel.setForeground(Color.white);
-        timeLabel.setForeground(Color.white);
-        livesLabel.setForeground(Color.white);
+    protected void drawScoreboard(int score, int time, int lives, Graphics g) {
+//        scoreLabel.setForeground(Color.white);
+//        timeLabel.setForeground(Color.white);
+//        livesLabel.setForeground(Color.white);
+//
+//        scoreLabel.setText("Score: " + score);
+//        livesLabel.setText("Lives: " + lives);
+        int interval = STATS_WIDTH / 7;
+        g.setColor(Color.white);
 
-        scoreLabel.setText("Score: " + score);
-        livesLabel.setText("Lives: " + lives);
+        g.drawString("Score: " + score, 5, 20);
+        g.drawString("Lives: " + lives, interval * 6, 20);
+
+//        System.out.println("score is " + score);
         String timeTxt = "";
+// TODO is only showing the digits, no zero spacers
         if (time >= 60) {
             int hours = time / 60;
             int minutes = time % 60;
@@ -96,8 +104,8 @@ frame.setLocationRelativeTo(null);
         else {
             timeTxt = time + "";
         }
-        timeLabel.setText(timeTxt);
-
+//        timeLabel.setText(timeTxt);
+        g.drawString(timeTxt, STATS_WIDTH/2, 20);
 
 
 //        scoreLabel = new JLabel();
