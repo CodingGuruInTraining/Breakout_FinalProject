@@ -81,29 +81,29 @@ public class Game_GUI implements KeyListener, Globals {
 
     protected void promptUsername() {
 
-        userTextField = new JTextField();
-        submitButton = new JButton("Submit");
-        frame.add(userTextField);
-        frame.add(submitButton);
-        userTextField.setLocation(20, 260);
-        submitButton.setLocation(150, 260);
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (userTextField.getText() != "" && userTextField.getText() != null) {
-                    goodSubmit = userTextField.getText();
-                    userTextField.setText("");
-                }
-            }
-        });
+//        userTextField = new JTextField();
+//        submitButton = new JButton("Submit");
+//        frame.add(userTextField);
+//        frame.add(submitButton);
+//        userTextField.setLocation(20, 260);
+//        submitButton.setLocation(150, 260);
+//        submitButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (userTextField.getText() != "" && userTextField.getText() != null) {
+//                    goodSubmit = userTextField.getText();
+//                    userTextField.setText("");
+//                }
+//            }
+//        });
 
 
 
 
-        //        String username = JOptionPane.showInputDialog("Please enter a username:");
-//        while (username == "" || username == null) {
-//            username = JOptionPane.showInputDialog("Please enter a username:");
-//        }
+                String username = JOptionPane.showInputDialog("Please enter a username:");
+        while (username == "" || username == null) {
+            username = JOptionPane.showInputDialog("Please enter a username:");
+        }
 //        return username;
     }
 

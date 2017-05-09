@@ -104,7 +104,8 @@ public class GameMgr implements Runnable, Globals{
             }
         }
         // Runs Thread ending method as a redundant safety action.
-        endGame();
+        makeScore(score);
+//        endGame();
     }
 
 
@@ -150,11 +151,13 @@ public class GameMgr implements Runnable, Globals{
             // Checks if the player has run out of lives and ends the game if so.
             if (lives == 0) {
                 gameover();
+
             }
             else {
                 ball.setFloorHit(false);
                 ball.resetBall();
             }
+
         }
         // Finalize process.
         bufferStrategy.show();
@@ -288,7 +291,7 @@ public class GameMgr implements Runnable, Globals{
         graphics.setColor(Color.red);
         graphics.setFont(new Font("Rockwell", Font.PLAIN, 40));
         // Displays message.
-        graphics.drawString("Gameover!", ball.START_X/2, ball.START_Y);
+        graphics.drawString("Gameover!", ball.START_X/2, ball.START_Y/3);
 
 
 //        java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
@@ -301,7 +304,7 @@ public class GameMgr implements Runnable, Globals{
         endGame();
 //        String username = gameFrame.promptUsername();
 
-        makeScore(score);
+//        makeScore(score);
     }
 
     protected void makeScore(int score) {
