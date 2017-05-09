@@ -1,8 +1,6 @@
 package com.mark;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -12,6 +10,7 @@ import java.util.TimerTask;
  * This Class outlines the design for a Game Manager object,
  * which controls a lot of the game processing.
  */
+
 public class GameMgr implements Runnable, Globals{
     // Defines single object variables.
     protected Game_GUI gameFrame;
@@ -21,11 +20,12 @@ public class GameMgr implements Runnable, Globals{
     protected ArrayList<Brick> bricks;
     protected Paddle paddle;
     protected Ball ball;
+    protected Timer gameTime;
 
     // Flag variable to indicate "game state."
     protected boolean gameON = false;
     // Determines speed of redraw.
-    protected int fps = 40;
+    protected int fps = FPS;
     // Creates array of color objects.
     protected Color[] brickColors = { Color.red, Color.orange, Color.yellow,
             Color.green, Color.blue, Color.magenta };
@@ -36,16 +36,16 @@ public class GameMgr implements Runnable, Globals{
     protected int rowsOfBricks = 6;
 
 // TODO consider making a score class.
-// TODO add static values to interface class.
-    protected int score = 0;
-    protected int pointsPerHit = 20;
-    protected int lives = 3;
-    protected int timeInGame = 0;
-    Timer gameTime;
+    protected int score;
+    protected int lives = LIVES_START;
+    protected int timeInGame;
 
 
 
-    // Constructor.
+
+/*************
+ *  Constructor.
+ *  **************/
     public GameMgr() {
         // Instantiates single objects.
         gameFrame = new Game_GUI();
@@ -57,25 +57,25 @@ public class GameMgr implements Runnable, Globals{
         bricksPerRow = BOARD_WIDTH / BRICK_WIDTH;
         // Creates array to hold all the Brick objects.
         bricks = new ArrayList<Brick>();
+        // Runs initial build method of bricks.
         makeBricks();
 
-
+        // Sets up game timer for the clock.
         gameTime = new Timer();
         gameTime.schedule(new TimerTask() {
             @Override
             public void run() {
                 timeInGame += 1;
-//                System.out.println(timeInGame);
             }
         },0,1000);
-
-
-
     }
 
 
 
 
+/*************
+ *  The RUN Method
+ *  **************/
     // Standard run method that runs the app.
     public void run() {
         // Calculates how many nanoseconds are in one cycle.
@@ -85,13 +85,8 @@ public class GameMgr implements Runnable, Globals{
         long currentTime;
         long prevCurrTime = System.nanoTime();
 
-
-//        makeBricks();
-
-
         // Loops until variable value is changed.
         while (gameON) {
-// TODO make a gameover part
             // Gets current time in nanoseconds.
             currentTime = System.nanoTime();
             // Calculates how much time has passed since the last cycle.
@@ -107,6 +102,11 @@ public class GameMgr implements Runnable, Globals{
         endGame();
     }
 
+
+
+/*************
+ *  The DRAW Method
+ *  **************/
     private void draw() {
         // Generates a BufferedStrategy object to utilize buffer frames
         // between renders.
@@ -122,33 +122,27 @@ public class GameMgr implements Runnable, Globals{
         // Clears board.
         graphics.clearRect(0, STATS_HEIGHT, BOARD_WIDTH, BOARD_HEIGHT);
 
-        // Runs background draw method.
+        /** Draw commands: */
+        // Runs the background draw methods.
         gameFrame.draw(graphics);
         gameFrame.drawScoreboard(score, timeInGame, lives, graphics);
-
         // Runs the Paddle's draw method and passes an integer. The
         // integer comes from the game frame's keypressed event.
         paddle.draw(gameFrame.getMoveDirection(), graphics);
         // Runs the Ball's draw method.
         ball.draw(paddle.getX_loc(), paddle.getY_loc(), graphics);
-
-
-
-
-
-
-
-        // Runs method to draw all active Bricks.
-//        makeBricks();           // just using starting point method for now
-
-
+        // Runs method to draw all active bricks.
         drawBricks();
+        /***/
 
-
+        // Runs method that detects any collisions between the ball and each
+        // brick object.
         detectCollisions();
-
+        // Checks if boolean flag in Ball Class is indicating the ball has hit
+        // the floor and should be punished by losing a life.
         if (ball.getFloorHit()) {
             lives--;
+            // Checks if the player has run out of lives and ends the game if so.
             if (lives == 0) {
                 gameover();
             }
@@ -157,15 +151,15 @@ public class GameMgr implements Runnable, Globals{
                 ball.resetBall();
             }
         }
-
-
         // Finalize process.
         bufferStrategy.show();
         graphics.dispose();
     }
 
 
-
+/*************
+ *  Game Thread Start and End.
+ *  **************/
     // Creates new game instance/thread.
     public synchronized void startGame() {
         if (gameON) {
@@ -195,6 +189,11 @@ public class GameMgr implements Runnable, Globals{
         }
     }
 
+
+
+/*************
+ *  makeBricks
+ *  **************/
     protected void makeBricks() {
         // Makes Brick objects and store in array.
 // TODO change rowsofbricks to array length or something
@@ -210,26 +209,38 @@ public class GameMgr implements Runnable, Globals{
         }
     }
 
+
+
+
+/*************
+ *  Brick Drawer
+ *  **************/
     protected void drawBricks() {
-//        int ballX = ball.getX();
-//        int ballY = ball.getY();
         for (Brick b : bricks) {
             b.draw(graphics);
         }
     }
 
 
+
+
+/*************
+ *  Collision Detection
+ *  **************/
     protected void detectCollisions() {
+        // Gets the ball's current location.
         int ballx = ball.getX();
         int bally = ball.getY();
+        // Creates a Rectangle object of the ball's location.
+        Rectangle ballRect = new Rectangle(ballx, bally, BALL_DIAMETER, BALL_DIAMETER);
+        // Loops through each brick and creates a Rectangle object for easy comparison
+        // using builtin methods.
         for (Brick b : bricks) {
-// TODO maybe move checks to either Brick or Ball class
-
-
-            Rectangle ballRect = new Rectangle(ballx, bally, BALL_DIAMETER, BALL_DIAMETER);
             Rectangle brickRect = new Rectangle(b.x_loc, b.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
-
+            // Checks if the two objects intersect.
             if (ballRect.intersects(brickRect)) {
+                // Creates two variables that hold how much of an overlap the two
+                // objects have. This helps determine what side of the brick was hit.
                 int xoverlap;
                 int yoverlap;
 
@@ -246,45 +257,34 @@ public class GameMgr implements Runnable, Globals{
                 else {
                     yoverlap = (b.y_loc + BRICK_HEIGHT) - bally;
                 }
-
+                // Runs ball's method to alter the direction it goes.
                 ball.changeDirectionHitBrick(xoverlap, yoverlap);
+                // Removes the struck brick from array so it won't be
+                // drawn anymore.
                 bricks.remove(b);
-                score += pointsPerHit;
-                System.out.println(score);
+                // Adds points to total score and exits loop.
+                score += POINTS_PER_HIT;
                 return;
             }
-//            http://stackoverflow.com/questions/19408458/brickbreaker-clone-ball-brick-collision-and-ball-behavior-on-brick-collision
-
-
-
-
-//            if (ballx < b.x_loc + BRICK_WIDTH &&                // ball is on LEFT half of brick
-//                    ballx + BALL_DIAMETER > b.x_loc &&          // ball passed LEFT side >>>
-//                    bally < b.y_loc + BRICK_HEIGHT &&
-//                    bally + BRICK_HEIGHT > b.y_loc ) {
-//
-//
-//                ball.changeDirectionHitBrick(b);
-//
-//
-//                bricks.remove(b);
-//
-//
-//                System.out.println("collision!");
-//                return;
-//            }
         }
     }
 
-    protected void gameover() {
-        System.out.println("gameover method reached");
-        gameFrame.draw(graphics);
-        //        graphics.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
-//        gameFrame.drawScoreboard(score, timeInGame, lives, graphics);
-        System.out.println(score + " " + lives);
-        graphics.setColor(Color.red);
-        graphics.drawString("Gameover!", ball.START_X, ball.START_Y);
 
+
+
+
+/*************
+ *  Gameover Method
+ *  **************/
+    protected void gameover() {
+        // Runs game frame's draw method to clear all drawings.
+        gameFrame.draw(graphics);
+        // Sets the color and font of the upcoming messages.
+        graphics.setColor(Color.red);
+        graphics.setFont(new Font("Rockwell", Font.PLAIN, 40));
+        // Displays message.
+        graphics.drawString("Gameover!", ball.START_X/2, ball.START_Y);
+        // Turns off loop and ends thread.
         gameON = false;
         endGame();
     }
@@ -300,3 +300,5 @@ public class GameMgr implements Runnable, Globals{
 // Timer help:
 //http://stackoverflow.com/questions/14454063/how-to-make-a-timer
 
+// Collision detection help:
+//http://stackoverflow.com/questions/19408458/brickbreaker-clone-ball-brick-collision-and-ball-behavior-on-brick-collision
