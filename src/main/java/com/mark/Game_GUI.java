@@ -61,7 +61,6 @@ public class Game_GUI implements KeyListener, Globals {
         g.drawString("Score: " + score, 5, 20);
         g.drawString("Lives: " + lives, interval * 6, 20);
 
-
         String timeTxt = "";
 
         if (time >= 60) {
@@ -78,25 +77,10 @@ public class Game_GUI implements KeyListener, Globals {
             if (time < 10) {
                 timeTxt = "0:0" + time;
             }
-//            else if (time % 10 == 0) {
-//                timeTxt = "0:" + time + "0";
-//            }
             else {
                 timeTxt = "0:" + time;
             }
         }
-//        int hours;
-//        int minutes;
-//        if (time >=60) {
-//            hours = time / 60;
-//            minutes = time % 60;
-//        }
-//        else {
-//            hours = 0;
-//            minutes = time;
-//        }
-//        timeTxt = String.format("{0:##}:{1:##}", hours, minutes);
-
         g.drawString(timeTxt, STATS_WIDTH/2, 20);
     }
 
@@ -105,31 +89,10 @@ public class Game_GUI implements KeyListener, Globals {
 
 
     protected void promptUsername() {
-
-//        userTextField = new JTextField();
-//        submitButton = new JButton("Submit");
-//        frame.add(userTextField);
-//        frame.add(submitButton);
-//        userTextField.setLocation(20, 260);
-//        submitButton.setLocation(150, 260);
-//        submitButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if (userTextField.getText() != "" && userTextField.getText() != null) {
-//                    goodSubmit = userTextField.getText();
-//                    userTextField.setText("");
-//                }
-//            }
-//        });
-
-
-
-
-                String username = JOptionPane.showInputDialog("Please enter a username:");
+        String username = JOptionPane.showInputDialog("Please enter a username:");
         while (username == "" || username == null) {
             username = JOptionPane.showInputDialog("Please enter a username:");
         }
-//        return username;
     }
 
 

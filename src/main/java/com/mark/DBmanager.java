@@ -157,6 +157,14 @@ public class DBmanager {
 
 
 
+    protected boolean isExist(String name, ArrayList<Score> scores) {
+        for (Score s : scores) {
+            if (s.username.equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 
