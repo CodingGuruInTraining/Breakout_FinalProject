@@ -21,6 +21,9 @@ public class GameMgr implements Runnable, Globals{
     protected Paddle paddle;
     protected Ball ball;
     protected Timer gameTime;
+    protected DBmanager dbMgr;
+    protected ArrayList<Score> allScores;
+    protected Score scoreKeeper;
 
     // Flag variable to indicate "game state."
     protected boolean gameON = false;
@@ -68,6 +71,8 @@ public class GameMgr implements Runnable, Globals{
                 timeInGame += 1;
             }
         },0,1000);
+
+// TODO implement DBmanager object
     }
 
 
@@ -284,6 +289,12 @@ public class GameMgr implements Runnable, Globals{
         graphics.setFont(new Font("Rockwell", Font.PLAIN, 40));
         // Displays message.
         graphics.drawString("Gameover!", ball.START_X/2, ball.START_Y);
+
+        java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
+//        scoreKeeper = new Score(,score, currDate);
+        allScores.add(scoreKeeper);
+
+
         // Turns off loop and ends thread.
         gameON = false;
         endGame();

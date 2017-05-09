@@ -54,11 +54,6 @@ public class DBmanager {
             Statement statement = connection.createStatement()) {
             if (connection != null) {
                 statement.executeUpdate(createTbl);
-
-
-
-
-
                 return connection;
             }
         }
@@ -71,14 +66,22 @@ public class DBmanager {
 
 
 
-//    protected ResultSet selectAll() {
-//        try (Connection connection = makeConnection())
+    protected ResultSet selectAll() {
+        try (Connection connection = makeConnection()) {
+            ResultSet rs = null; // ps.executeQuery(somethin)
+            if (rs != null) {
+
+                return rs;
+            }
+        }
+        catch(SQLException err) {
+            err.printStackTrace();
+        }
 
 
 
-    // ResultSet rs = ps.executeQuery(somethin)
-
-//    }
+        return null;
+    }
 
 
 

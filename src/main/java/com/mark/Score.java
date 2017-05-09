@@ -3,7 +3,7 @@ package com.mark;
 import java.sql.Date;
 
 /**
- * Created by hl4350hb on 5/9/2017.
+ * This Class outlines the design of a Score object.
  */
 public class Score {
     protected String username;
@@ -21,6 +21,6 @@ public class Score {
 
     @Override
     public String toString() {
-        return "Score{}";
+        return "User: " + username + "'s high score: " + score;
     }
 }
