@@ -2,6 +2,7 @@ package com.mark;
 
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 //import java.sql.Date;
 
@@ -70,17 +71,30 @@ public class DBmanager {
         try (Connection connection = makeConnection()) {
             ResultSet rs = null; // ps.executeQuery(somethin)
             if (rs != null) {
-
                 return rs;
             }
         }
         catch(SQLException err) {
             err.printStackTrace();
         }
-
-
-
         return null;
+    }
+
+    protected ArrayList<Score> getRSscores(ResultSet rs) {
+        ArrayList<Score> scores = new ArrayList<>();
+        try {
+            while (rs.next()) {
+// TODO move statics to interface.
+                String username = rs.getString("username");
+                int score = rs.getInt("high_score");
+                java.sql.Date scoreDate = rs.getDate("score_date");
+                scores.add(new Score(username, score, scoreDate));
+            }
+        }
+        catch (SQLException err) {
+            err.printStackTrace();
+        }
+        return scores;
     }
 
 

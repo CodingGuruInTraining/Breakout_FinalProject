@@ -279,7 +279,7 @@ public class GameMgr implements Runnable, Globals{
 
 
 /*************
- *  Gameover Method
+ *  Gameover (Visual) Method
  *  **************/
     protected void gameover() {
         // Runs game frame's draw method to clear all drawings.
@@ -290,14 +290,25 @@ public class GameMgr implements Runnable, Globals{
         // Displays message.
         graphics.drawString("Gameover!", ball.START_X/2, ball.START_Y);
 
-        java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
+
+//        java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
 //        scoreKeeper = new Score(,score, currDate);
-        allScores.add(scoreKeeper);
+//        allScores.add(scoreKeeper);
 
 
         // Turns off loop and ends thread.
         gameON = false;
         endGame();
+//        String username = gameFrame.promptUsername();
+        makeScore(score);
+    }
+
+    protected void makeScore(int score) {
+        String username = gameFrame.promptUsername();
+// TODO query database for match
+//        java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
+//        scoreKeeper = new Score(username, score, currDate);
+//        allScores.add(scoreKeeper);
     }
 }
 

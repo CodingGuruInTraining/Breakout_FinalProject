@@ -71,6 +71,21 @@ public class Game_GUI implements KeyListener, Globals {
     }
 
 
+
+
+
+    protected String promptUsername() {
+        String username = JOptionPane.showInputDialog("Please enter a username:");
+        while (username == "" || username == null) {
+            username = JOptionPane.showInputDialog("Please enter a username:");
+        }
+        return username;
+    }
+
+
+
+
+
 /******
  Keypress Listeners
  ********/
