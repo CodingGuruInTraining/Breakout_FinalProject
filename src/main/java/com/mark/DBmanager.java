@@ -37,13 +37,28 @@ public class DBmanager {
 //        } catch (ClassNotFoundException err) {
 //            err.printStackTrace();
 //        }
-
+        try {
+            Class.forName("org.sqlite.JDBC").newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
 
 //        String url = "jdbc:sqlite:" + dirPath + "/highscores.db";
-        String url = "jdbc:sqlite:highscores.sqlite";
-        try (Connection connection = DriverManager.getConnection(url)) {
+        String url = "jdbc:sqlite:highscores.db";
+        try (Connection connection = DriverManager.getConnection(url);
+            Statement statement = connection.createStatement()) {
             if (connection != null) {
+                statement.executeUpdate(createTbl);
+
+
+
+
+
                 return connection;
             }
         }
@@ -61,16 +76,23 @@ public class DBmanager {
 
 
 
-    // ps.executeQuery(somethin)
+    // ResultSet rs = ps.executeQuery(somethin)
+
 //    }
 
 
 
 
     protected void addNewEntry(String username, int score) {
+
+
+//        String url = "jdbc:sqlite:highscores.db";
+//        try (Connection conn = DriverManager.getConnection(url)) {
+
+
         try (Connection conn = makeConnection();
-             Statement statement = conn.createStatement()) {
-            PreparedStatement ps = conn.prepareStatement(insertNew);
+             PreparedStatement ps = conn.prepareStatement(insertNew)) {
+//            PreparedStatement ps = conn.prepareStatement(insertNew);
 
 //        PreparedStatement ps = conn.prepareStatement(insertNew)) {
 //        try {
@@ -87,7 +109,7 @@ public class DBmanager {
 
             ps.executeUpdate();
             conn.close();
-
+            System.out.println("closing time");
         }
         catch (SQLException err) {
             err.printStackTrace();
