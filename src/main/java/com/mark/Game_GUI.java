@@ -63,15 +63,40 @@ public class Game_GUI implements KeyListener, Globals {
 
 
         String timeTxt = "";
-// TODO is only showing the digits, no zero spacers
+
         if (time >= 60) {
             int hours = time / 60;
             int minutes = time % 60;
-            timeTxt = hours + ":" + minutes;
+            if (minutes < 10) {
+                timeTxt = hours + ":0" + minutes;
+            }
+            else {
+                timeTxt = hours + ":" + minutes;
+            }
         }
         else {
-            timeTxt = time + "";
+            if (time < 10) {
+                timeTxt = "0:0" + time;
+            }
+//            else if (time % 10 == 0) {
+//                timeTxt = "0:" + time + "0";
+//            }
+            else {
+                timeTxt = "0:" + time;
+            }
         }
+//        int hours;
+//        int minutes;
+//        if (time >=60) {
+//            hours = time / 60;
+//            minutes = time % 60;
+//        }
+//        else {
+//            hours = 0;
+//            minutes = time;
+//        }
+//        timeTxt = String.format("{0:##}:{1:##}", hours, minutes);
+
         g.drawString(timeTxt, STATS_WIDTH/2, 20);
     }
 

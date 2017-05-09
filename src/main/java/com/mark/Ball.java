@@ -38,7 +38,7 @@ public class Ball implements Globals {
         this.START_X = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
         this.START_Y = (((BOARD_HEIGHT + STATS_HEIGHT) / 2) - (BALL_DIAMETER / 2));
         this.START_X_SPD = 2;
-        this.START_Y_SPD = 3;
+        this.START_Y_SPD = 5; // 3;
         resetBall();
     }
 
