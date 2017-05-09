@@ -14,8 +14,10 @@ public class Ball implements Globals {
 
 
 
-//    protected
-
+    protected int START_X;
+    protected int START_Y;
+    protected int START_X_SPD;
+    protected int START_Y_SPD;
 
 
     protected int brickX;
@@ -37,13 +39,25 @@ public class Ball implements Globals {
     public void setBrickHit(boolean brickHit) { this.brickHit = brickHit; }
 
     // Constructor.
-    Ball() {
+    public Ball() {
         // Sets the Ball's starting location to 1/3 of window's width
         // and 1/2 of window's height.
-        this.x_loc = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
-        this.y_loc = (((BOARD_HEIGHT + STATS_HEIGHT) / 2) - (BALL_DIAMETER / 2));
-        this.x_spd = 2;
-        this.y_spd = 3;
+
+//        int tempx =
+//        int tempy =
+//        int tempxspd = 2;
+//        int tempyspd = 3;
+        this.START_X = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
+        this.START_Y = (((BOARD_HEIGHT + STATS_HEIGHT) / 2) - (BALL_DIAMETER / 2));
+        this.START_X_SPD = 2;
+        this.START_Y_SPD = 3;
+
+//        this.x_loc = tempx;
+//        this.y_loc = tempy;
+//        this.x_spd = tempxspd;
+//        this.y_spd = tempyspd;
+
+        resetBall();
     }
 
     // Draw/redraw method.
@@ -112,6 +126,10 @@ public class Ball implements Globals {
 
     protected void resetBall() {
 // TODO add starting variables for x, y, and their speeds
+        this.x_loc = this.START_X;
+        this.y_loc = this.START_Y;
+        this.x_spd = this.START_X_SPD;
+        this.y_spd = this.START_Y_SPD;
     }
 
     protected void changeDirectionHitBrick(int xoverlap, int yoverlap) { //Brick b) {

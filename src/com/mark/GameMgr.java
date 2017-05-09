@@ -134,9 +134,13 @@ public class GameMgr implements Runnable, Globals{
 
 
 
-        if (!ball.getFloorHit()) {
+        if (ball.getFloorHit()) {
             lives--;
+            ball.setFloorHit(false);
             ball.resetBall();
+            if (lives == 0) {
+                endGame();
+            }
         }
 
 
