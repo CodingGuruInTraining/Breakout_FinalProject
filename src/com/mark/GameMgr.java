@@ -134,14 +134,7 @@ public class GameMgr implements Runnable, Globals{
 
 
 
-        if (ball.getFloorHit()) {
-            lives--;
-            ball.setFloorHit(false);
-            ball.resetBall();
-            if (lives == 0) {
-                endGame();
-            }
-        }
+
 
 
 
@@ -153,6 +146,17 @@ public class GameMgr implements Runnable, Globals{
 
 
         detectCollisions();
+
+        if (ball.getFloorHit()) {
+            lives--;
+            if (lives == 0) {
+                gameover();
+            }
+            else {
+                ball.setFloorHit(false);
+                ball.resetBall();
+            }
+        }
 
 
         // Finalize process.
@@ -270,6 +274,19 @@ public class GameMgr implements Runnable, Globals{
 //                return;
 //            }
         }
+    }
+
+    protected void gameover() {
+        System.out.println("gameover method reached");
+        gameFrame.draw(graphics);
+        //        graphics.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
+//        gameFrame.drawScoreboard(score, timeInGame, lives, graphics);
+        System.out.println(score + " " + lives);
+        graphics.setColor(Color.red);
+        graphics.drawString("Gameover!", ball.START_X, ball.START_Y);
+
+        gameON = false;
+        endGame();
     }
 }
 
