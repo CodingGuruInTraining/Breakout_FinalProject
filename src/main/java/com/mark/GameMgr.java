@@ -200,7 +200,7 @@ public class GameMgr implements Runnable, Globals{
 
 
 /*************
- *  makeBricks
+ *  Makes all Bricks at start
  *  **************/
     protected void makeBricks() {
         // Makes Brick objects and store in array.
@@ -291,8 +291,10 @@ public class GameMgr implements Runnable, Globals{
         graphics.setColor(Color.red);
         graphics.setFont(new Font("Rockwell", Font.PLAIN, 40));
         // Displays message.
-        graphics.drawString("Gameover!", ball.START_X/2, ball.START_Y/3);
-
+        int interval = (BOARD_HEIGHT + STATS_HEIGHT)/4;
+        graphics.drawString("Gameover!", ball.START_X/2, interval);
+        graphics.setFont(new Font("Rockwell", Font.PLAIN, 33));
+        graphics.drawString("Your Score: " + score, ball.START_X/2, interval * 3);
 
 //        java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
 //        scoreKeeper = new Score(,score, currDate);

@@ -4,7 +4,6 @@ import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
-//import java.sql.Date;
 
 /**
  * This Class outlines the design for managing a SQLite database connection.
@@ -31,13 +30,6 @@ public class DBmanager {
     protected Connection makeConnection() {
 // TODO move statics to interface class later when working
 
-
-//        try {
-//            Class.forName("org.sqlite.JDBC");
-//
-//        } catch (ClassNotFoundException err) {
-//            err.printStackTrace();
-//        }
         try {
             Class.forName("org.sqlite.JDBC").newInstance();
         } catch (InstantiationException e) {
@@ -47,7 +39,6 @@ public class DBmanager {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
 
 //        String url = "jdbc:sqlite:" + dirPath + "/highscores.db";
         String url = "jdbc:sqlite:highscores.db";
@@ -67,6 +58,9 @@ public class DBmanager {
 
 
 
+
+
+
     protected ResultSet selectAll() {
         try (Connection connection = makeConnection()) {
             ResultSet rs = null; // ps.executeQuery(somethin)
@@ -79,6 +73,11 @@ public class DBmanager {
         }
         return null;
     }
+
+
+
+
+
 
     protected ArrayList<Score> getRSscores(ResultSet rs) {
         ArrayList<Score> scores = new ArrayList<>();
@@ -96,6 +95,8 @@ public class DBmanager {
         }
         return scores;
     }
+
+
 
 
 
@@ -134,6 +135,10 @@ public class DBmanager {
     }
 
 
+
+
+
+
     protected void updateEntry(String username, int newScore) {
         try (Connection connection = makeConnection();
         PreparedStatement ps = connection.prepareStatement(updateOld)) {
@@ -149,10 +154,18 @@ public class DBmanager {
 
 
 
+
+
+
+
+
+
+
+
 // TODO   for testing purposes: remove later.
     public static void main(String[] args) {
         DBmanager mgr = new DBmanager();
-        mgr.addNewEntry("test1", 42);
+        mgr.addNewEntry("test", 42);
     }
 }
 
