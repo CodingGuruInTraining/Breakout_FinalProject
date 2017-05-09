@@ -2,6 +2,8 @@ package com.mark;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -12,15 +14,18 @@ import java.awt.event.KeyListener;
 public class Game_GUI implements KeyListener, Globals {
     private JFrame frame;
     private Canvas canvas;
+    private JTextField userTextField;
+    private JButton submitButton;
     // Variable represents what direction to move paddle.
     protected int moveDirection = 0;
+    protected String goodSubmit;
 
     // Getters.
     public Canvas getCanvas() {
         return canvas;
     }
     public int getMoveDirection() { return moveDirection; }
-
+    public String getGoodSubmit() { return goodSubmit; }
 
 
 
@@ -74,12 +79,32 @@ public class Game_GUI implements KeyListener, Globals {
 
 
 
-    protected String promptUsername() {
-        String username = JOptionPane.showInputDialog("Please enter a username:");
-        while (username == "" || username == null) {
-            username = JOptionPane.showInputDialog("Please enter a username:");
-        }
-        return username;
+    protected void promptUsername() {
+
+        userTextField = new JTextField();
+        submitButton = new JButton("Submit");
+        frame.add(userTextField);
+        frame.add(submitButton);
+        userTextField.setLocation(20, 260);
+        submitButton.setLocation(150, 260);
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (userTextField.getText() != "" && userTextField.getText() != null) {
+                    goodSubmit = userTextField.getText();
+                    userTextField.setText("");
+                }
+            }
+        });
+
+
+
+
+        //        String username = JOptionPane.showInputDialog("Please enter a username:");
+//        while (username == "" || username == null) {
+//            username = JOptionPane.showInputDialog("Please enter a username:");
+//        }
+//        return username;
     }
 
 

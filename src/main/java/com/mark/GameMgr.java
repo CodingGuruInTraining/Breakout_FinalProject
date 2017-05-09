@@ -300,11 +300,13 @@ public class GameMgr implements Runnable, Globals{
         gameON = false;
         endGame();
 //        String username = gameFrame.promptUsername();
+
         makeScore(score);
     }
 
     protected void makeScore(int score) {
-        String username = gameFrame.promptUsername();
+        gameFrame.promptUsername();
+        String username = gameFrame.getGoodSubmit();
 // TODO query database for match
 //        java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
 //        scoreKeeper = new Score(username, score, currDate);
