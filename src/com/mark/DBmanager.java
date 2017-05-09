@@ -29,8 +29,19 @@ public class DBmanager {
 
     protected Connection makeConnection() {
 // TODO move statics to interface class later when working
+
+
+//        try {
+//            Class.forName("org.sqlite.JDBC");
+//
+//        } catch (ClassNotFoundException err) {
+//            err.printStackTrace();
+//        }
+
+
+
 //        String url = "jdbc:sqlite:" + dirPath + "/highscores.db";
-        String url = "jdbc:sqlite:highscores.db";
+        String url = "jdbc:sqlite:D:\\db\\highscores.sqlite";
         try (Connection connection = DriverManager.getConnection(url)) {
             if (connection != null) {
                 return connection;
@@ -44,9 +55,10 @@ public class DBmanager {
     }
 
     protected void addNewEntry(String username, int score) {
-        try {
-            conn = makeConnection();
-            PreparedStatement ps = conn.prepareStatement(insertNew);
+        try (Connection conn = makeConnection();
+        PreparedStatement ps = conn.prepareStatement(insertNew)) {
+//            conn = makeConnection();
+//            PreparedStatement ps = conn.prepareStatement(insertNew);
             ps.setString(1, username);
             ps.setInt(2, score);
             Date currDate = new Date();

@@ -12,18 +12,13 @@ public class Ball implements Globals {
     protected int x_spd;
     protected int y_spd;
 
-
-
+    // Defines starting location and speed for ball reset.
     protected int START_X;
     protected int START_Y;
     protected int START_X_SPD;
     protected int START_Y_SPD;
 
-
-    protected int brickX;
-    protected int brickY;
-    protected boolean brickHit = false;
-
+    // Flag to show ball has gone off the deep end.
     protected boolean floorHit = false;
 
 
@@ -33,45 +28,38 @@ public class Ball implements Globals {
     public boolean getFloorHit() { return this.floorHit; }
     public void setFloorHit(boolean changeIt) { this.floorHit = changeIt; }
 
-    // Temporary Brick Setters.
-    public void setBrickX(int brickX) { this.brickX = brickX; }
-    public void setBrickY(int brickY) { this.brickY = brickY; }
-    public void setBrickHit(boolean brickHit) { this.brickHit = brickHit; }
+
+
 
     // Constructor.
     public Ball() {
         // Sets the Ball's starting location to 1/3 of window's width
         // and 1/2 of window's height.
-
-//        int tempx =
-//        int tempy =
-//        int tempxspd = 2;
-//        int tempyspd = 3;
         this.START_X = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
         this.START_Y = (((BOARD_HEIGHT + STATS_HEIGHT) / 2) - (BALL_DIAMETER / 2));
         this.START_X_SPD = 2;
         this.START_Y_SPD = 3;
-
-//        this.x_loc = tempx;
-//        this.y_loc = tempy;
-//        this.x_spd = tempxspd;
-//        this.y_spd = tempyspd;
-
         resetBall();
     }
+
+
+
 
     // Draw/redraw method.
     protected void draw(int paddleX, int paddleY, Graphics g) {
         // Adds the current speeds to the Ball's current location.
         this.x_loc += this.x_spd;
         this.y_loc += this.y_spd;
-
         // Draws circle.
         g.fillOval(this.x_loc, this.y_loc, BALL_DIAMETER, BALL_DIAMETER);
         // Runs wall collision detecting method.
         // May be replaced with a global method later on.
         changeDirectionHitWall(paddleX, paddleY);
     }
+
+
+
+
 
     protected void changeDirectionHitWall(int paddleX, int paddleY) {
         // Checks if the Ball is at the left wall.
@@ -89,12 +77,7 @@ public class Ball implements Globals {
 // TODO this will be game over at some point
         else if (this.y_loc >= ((BOARD_HEIGHT + STATS_HEIGHT) - BALL_DIAMETER) && this.x_loc > 0) {
             this.floorHit = true;
-//            resetBall();
-//            return;
-//            this.y_spd *= -1;
         }
-
-
         int radius = BALL_DIAMETER / 2;
         if ((this.y_loc + BALL_DIAMETER) >= paddleY) {
             if (((this.x_loc + radius) >= paddleX) &&
@@ -102,27 +85,11 @@ public class Ball implements Globals {
                 this.y_spd *= -1;
             }
         }
-
-
-//        else if (brickHit) {
-//            // Ball hit side of Brick.
-//            if ((this.x_loc == (brickX + BRICK_WIDTH)) ||
-//                    (this.x_loc == brickX)) {
-//                if (this.y_loc == (brickY + BRICK_HEIGHT)) {
-//                    // hit corner
-//                } else {
-//                    // only hit side
-//                    this.x_spd *= -1;
-//                }
-//
-//            else if (this.x_loc == (brickX)) {
-//                    this.x_loc
-//                }
-//            }
-//        }
-
-
     }
+
+
+
+
 
     protected void resetBall() {
 // TODO add starting variables for x, y, and their speeds
@@ -132,20 +99,11 @@ public class Ball implements Globals {
         this.y_spd = this.START_Y_SPD;
     }
 
+
+
+
+
     protected void changeDirectionHitBrick(int xoverlap, int yoverlap) { //Brick b) {
-
-//        this.y_spd *= -1;
-
-//        if (this.y_spd > 0) {       // DOWN
-//
-//        }
-//        else if (this.y_spd < 0) {  // UP
-//
-//        }
-
-
-
-
         if (xoverlap == yoverlap) {
             this.x_spd *= -1;
             this.y_spd *= -1;
@@ -156,46 +114,5 @@ public class Ball implements Globals {
         else {
             this.y_spd *= -1;
         }
-
-
-
-
-
-        //        int radius = BALL_DIAMETER / 2;
-//
-//        if (((this.x_loc + radius) >= b.x_loc) || ((this.x_loc - radius) <= (b.x_loc + BRICK_WIDTH))) {
-//            this.x_spd *= -1;
-//            System.out.println("changed x spd");
-//        }
-//
-//        if (((this.y_loc - radius) >= (b.y_loc + BRICK_HEIGHT)) || ((this.y_loc + radius) <= b.y_loc)) {
-//            this.y_spd *= -1;
-//            System.out.println("changed y spd");
-//        }
-//        http://stackoverflow.com/questions/1561538/ball-and-brick-collision-handling?rq=1
-
-
-
-
-
-//        if ((this.x_loc + BALL_DIAMETER) < (b.x_loc + BRICK_WIDTH)) {
-//            // NOT right side
-//        }
-//        if (this.x_loc > b.x_loc) {
-//            // NOT left side
-//        }
-//        if (this.y_loc > b.y_loc) {
-//            // NOT bottom
-//        }
-//        if ((this.y_loc + BALL_DIAMETER) > (b.y_loc + BRICK_HEIGHT)) {
-//            // NOT top
-//        }
-//
-//
-//
-//
-//        if (this.x_spd > 0) {           // Moving right
-//            if (this.y_loc )
-//        }
     }
 }
