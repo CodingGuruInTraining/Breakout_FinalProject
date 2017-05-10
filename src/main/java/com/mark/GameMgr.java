@@ -38,7 +38,7 @@ public class GameMgr implements Runnable, Globals{
     // Can change later on to make more "difficult."
     protected int rowsOfBricks = 6;
 
-// TODO consider making a score class.
+
     protected int score;
     protected int lives = LIVES_START;
     protected int timeInGame;
@@ -317,10 +317,24 @@ public class GameMgr implements Runnable, Globals{
     protected void makeScore(int score) {
         gameFrame.promptUsername();
         String username = gameFrame.getGoodSubmit();
-// TODO query database for match
+        allScores = dbMgr.selectAll();
         java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
-        scoreKeeper = new Score(username, score, currDate);
-        allScores.add(scoreKeeper);
+        boolean dbCheck = dbMgr.isExist(username, allScores);
+        if (dbCheck) {
+            dbMgr.updateEntry(username, score);
+            for (Score s : allScores) {
+                if (s.username.equalsIgnoreCase(username)) {
+                    s.score = score;
+                    s.scoreDate = currDate;
+                    return;
+                }
+            }
+        }
+        else {
+            scoreKeeper = new Score(username, score, currDate);
+            dbMgr.addNewEntry(username, score);
+            allScores.add(scoreKeeper);
+        }
     }
 }
 

@@ -141,7 +141,7 @@ public class DBmanager {
 
             ps.executeUpdate();
 //            connection.close();
-            System.out.println("closing time");
+//            System.out.println("closing time");
         }
         catch (SQLException err) {
             err.printStackTrace();
