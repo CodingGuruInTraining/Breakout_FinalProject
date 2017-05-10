@@ -11,25 +11,14 @@ import java.util.Date;
 public class DBmanager {
     protected String dirPath;
     protected String createTbl;
+    protected String showAll;
     protected String insertNew;
     protected String updateOld;
-    protected Connection conn;
+//    protected Connection conn;
 
+    final String DB_URL = "jdbc:sqlite:highscores.db";
 
     public DBmanager() {
-        dirPath = Paths.get(".").toAbsolutePath().normalize().toString();
-        System.out.println(dirPath);
-        createTbl = "CREATE TABLE IF NOT EXISTS scores (" +
-                "username text PRIMARY KEY, " +
-                "high_score integer NOT NULL," +
-                "score_date date NOT NULL)";
-        insertNew = "INSERT INTO scores VALUES(?, ?, ?)";       // not sure if needs column names
-        updateOld = "UPDATE scores SET high_score = ? WHERE username = ?";
-    }
-
-    protected Connection makeConnection() {
-// TODO move statics to interface class later when working
-
         try {
             Class.forName("org.sqlite.JDBC").newInstance();
         } catch (InstantiationException e) {
@@ -40,20 +29,41 @@ public class DBmanager {
             e.printStackTrace();
         }
 
+
+        dirPath = Paths.get(".").toAbsolutePath().normalize().toString();
+        System.out.println(dirPath);
+        createTbl = "CREATE TABLE IF NOT EXISTS scores (" +
+                "username text PRIMARY KEY, " +
+                "high_score integer NOT NULL," +
+                "score_date date NOT NULL)";
+        showAll = "SELECT * FROM scores";
+        insertNew = "INSERT INTO scores VALUES(?, ?, ?)";       // not sure if needs column names
+        updateOld = "UPDATE scores SET high_score = ? WHERE username = ?";
+
+        createTable();
+    }
+
+    private void createTable() {
+// TODO move statics to interface class later when working
+
+
+
 //        String url = "jdbc:sqlite:" + dirPath + "/highscores.db";
-        String url = "jdbc:sqlite:highscores.db";
-        try (Connection connection = DriverManager.getConnection(url);
+//        String url = "jdbc:sqlite:highscores.db";
+        try (Connection connection = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement()) {
-            if (connection != null) {
+//            if (connection != null) {
                 statement.executeUpdate(createTbl);
-                return connection;
-            }
+//                return connection;
+//            }
+//            connection.close();
+//            statement.close();
         }
         catch (SQLException err) {
             err.printStackTrace();
         }
         System.out.println("database created successfully!");
-        return null;
+//        return null;
     }
 
 
@@ -62,13 +72,14 @@ public class DBmanager {
 
 
     protected ResultSet selectAll() {
-        try (Connection connection = makeConnection()) {
-            ResultSet rs = null; // ps.executeQuery(somethin)
+        try (Connection connection = DriverManager.getConnection(DB_URL);
+            PreparedStatement ps = connection.prepareStatement(showAll)) {
+            ResultSet rs = ps.executeQuery();
             if (rs != null) {
                 return rs;
             }
         }
-        catch(SQLException err) {
+        catch (SQLException err) {
             err.printStackTrace();
         }
         return null;
@@ -108,8 +119,8 @@ public class DBmanager {
 //        try (Connection conn = DriverManager.getConnection(url)) {
 
 
-        try (Connection conn = makeConnection();
-             PreparedStatement ps = conn.prepareStatement(insertNew)) {
+        try (Connection connection = DriverManager.getConnection(DB_URL);
+             PreparedStatement ps = connection.prepareStatement(insertNew)) {
 //            PreparedStatement ps = conn.prepareStatement(insertNew);
 
 //        PreparedStatement ps = conn.prepareStatement(insertNew)) {
@@ -126,7 +137,7 @@ public class DBmanager {
 //            System.out.println(sqlDate.toString());
 
             ps.executeUpdate();
-            conn.close();
+//            connection.close();
             System.out.println("closing time");
         }
         catch (SQLException err) {
@@ -140,12 +151,12 @@ public class DBmanager {
 
 
     protected void updateEntry(String username, int newScore) {
-        try (Connection connection = makeConnection();
+        try (Connection connection = DriverManager.getConnection(DB_URL);
         PreparedStatement ps = connection.prepareStatement(updateOld)) {
             ps.setInt(1, newScore);
             ps.setString(2, username);
             ps.executeUpdate();
-            connection.close();
+//            connection.close();
         }
         catch (SQLException err) {
             err.printStackTrace();
@@ -173,7 +184,26 @@ public class DBmanager {
 // TODO   for testing purposes: remove later.
     public static void main(String[] args) {
         DBmanager mgr = new DBmanager();
-        mgr.addNewEntry("test", 42);
+//        mgr.addNewEntry("test2", 42);
+        ResultSet rs = mgr.selectAll();
+        ArrayList<Score> scores = mgr.getRSscores(rs);
+//        try {
+//            String name = rs.getCursorName();
+//            System.out.println(name);
+//            System.out.println(rs.getString("username"));
+//            while (rs.next()) {
+//                name = rs.getCursorName();
+//                System.out.println(name);
+//                System.out.println(rs.getString("username"));
+//            }
+//        }
+//        catch (SQLException err) {
+//            err.printStackTrace();
+//        }
+//        ArrayList<Score> scores = new ArrayList<>();
+
+            System.out.println(scores.size());
+//        System.out.println(scores.get(0).username);
     }
 }
 
