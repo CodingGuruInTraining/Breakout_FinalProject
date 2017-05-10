@@ -74,7 +74,7 @@ public class Ball implements Globals {
         else if (this.y_loc <= STATS_HEIGHT && this.x_loc > 0) {
             this.y_spd *= -1;
         }
-// TODO this will be game over at some point
+        // Detects floor to remove life.
         else if (this.y_loc >= ((BOARD_HEIGHT + STATS_HEIGHT) - BALL_DIAMETER) && this.x_loc > 0) {
             this.floorHit = true;
         }
@@ -90,7 +90,7 @@ public class Ball implements Globals {
 
 
 
-
+    // Moves the ball back to its starting position.
     protected void resetBall() {
 // TODO add starting variables for x, y, and their speeds
         this.x_loc = this.START_X;
@@ -102,8 +102,9 @@ public class Ball implements Globals {
 
 
 
-
-    protected void changeDirectionHitBrick(int xoverlap, int yoverlap) { //Brick b) {
+    // Uses passed variables to change the direction of the ball when
+    // a brick is hit.
+    protected void changeDirectionHitBrick(int xoverlap, int yoverlap) {
         if (xoverlap == yoverlap) {
             this.x_spd *= -1;
             this.y_spd *= -1;

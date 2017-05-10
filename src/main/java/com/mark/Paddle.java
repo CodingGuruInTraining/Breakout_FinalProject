@@ -3,7 +3,7 @@ package com.mark;
 import java.awt.*;
 
 /**
- * Created by hl4350hb on 5/1/2017.
+ * This Class outlines the design of a Paddle object.
  */
 public class Paddle implements Globals{
 
@@ -14,7 +14,6 @@ public class Paddle implements Globals{
     protected int y_loc;
     // How many pixels paddle moves when user moves it.
     protected int moveDist = 5;
-
 
     // Getters for current location.
     public int getX_loc() { return x_loc; }
@@ -36,7 +35,7 @@ public class Paddle implements Globals{
 
 
 
-
+    // Draw method.
     protected void draw(int direction, Graphics g) {
         this.x_loc += (moveDist * direction);
 

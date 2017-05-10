@@ -10,9 +10,7 @@ public class Score {
     protected int score;
     protected Date scoreDate;
 
-//    public Score() {
-//    }
-
+    // Constructor.
     public Score(String user, int aScore, Date theDate) {
         this.username = user;
         this.score = aScore;

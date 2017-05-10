@@ -14,17 +14,16 @@ import java.util.ArrayList;
  * This Class outlines the design for the GUI object.
  */
 public class Game_GUI extends JFrame implements KeyListener, Globals {
-//    private JFrame frame;
-//    private Canvas canvas;
     private JTable table;
+    private JLabel scoreLabel;
+    private JLabel timeLabel;
+    private JLabel livesLabel;
+
     // Variable represents what direction to move paddle.
     protected int moveDirection = 0;
     protected String goodSubmit;
 
     // Getters.
-//    public Canvas getCanvas() {
-//        return canvas;
-//    }
     public int getMoveDirection() { return moveDirection; }
     public String getGoodSubmit() { return goodSubmit; }
 
@@ -38,11 +37,15 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
         this.setResizable(false);
         this.setVisible(true);
 
-//        canvas = new Canvas();
-//        canvas.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
-//        frame.add(canvas);
         this.addKeyListener(this);
         this.pack();
+
+        scoreLabel = new JLabel();
+        timeLabel = new JLabel();
+        livesLabel = new JLabel();
+        this.add(scoreLabel);
+        this.add(timeLabel);
+        this.add(livesLabel);
 
         this.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
         this.setLocationRelativeTo(null);
@@ -50,30 +53,40 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
 
 
 
-
+    // Draw method.
     protected void draw(Graphics g) {
         g.setColor(Color.black);
         g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
     }
 
+    // Draw method for the scoreboard at top.
     protected void drawScoreboard(int score, int time, int lives, Graphics g) {
-
+        // Breaks up the window's width into intervals.
         int interval = STATS_WIDTH / 7;
+        // Sets color for text.
         g.setColor(Color.white);
 
-        g.drawString("Score: " + score, 5, 20);
-        g.drawString("Lives: " + lives, interval * 6, 20);
+        // Updates label information with passed variables.
+        scoreLabel.setText("Score: " + score);
+        scoreLabel.setLocation(5, 20);
 
+        livesLabel.setText("Lives: " + lives);
+        livesLabel.setLocation(interval * 6, 20);
+
+//        g.drawString("Score: " + score, 5, 20);
+//        g.drawString("Lives: " + lives, interval * 6, 20);
+
+        // Transforms time value into a more appealing style.
         String timeTxt = "";
 
         if (time >= 60) {
-            int hours = time / 60;
-            int minutes = time % 60;
-            if (minutes < 10) {
-                timeTxt = hours + ":0" + minutes;
+            int minutes = time / 60;
+            int seconds = time % 60;
+            if (seconds < 10) {
+                timeTxt = minutes + ":0" + seconds;
             }
             else {
-                timeTxt = hours + ":" + minutes;
+                timeTxt = minutes + ":" + seconds;
             }
         }
         else {
@@ -84,18 +97,23 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
                 timeTxt = "0:" + time;
             }
         }
-        g.drawString(timeTxt, STATS_WIDTH/2, 20);
+
+        timeLabel.setText(timeTxt);
+        timeLabel.setLocation(STATS_WIDTH/2, 20);
+//        g.drawString(timeTxt, STATS_WIDTH/2, 20);
     }
 
 
 
 
-
+    // Method to display an input box for user input.
     protected void promptUsername() {
         String username = JOptionPane.showInputDialog("Please enter a username:");
+        // Validates that user enters a value.
         while (username == "" || username == null) {
             username = JOptionPane.showInputDialog("Please enter a username:");
         }
+        // Sets variable to input.
         goodSubmit = username;
     }
 
@@ -105,22 +123,22 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
 
     protected void showHighScores(ArrayList<Score> scores) {
 // TODO add timeout so still shows gameover screen briefly
-//        this.getContentPane().removeAll();
+        // Makes string arrays for the JTable.
         String[] columns =  {"Username", "High Score", "Date Achieved"};
         String[][] data = new String[scores.size()][scores.size()];
-
-//        for (Score s : scores) {
+        // Loops through passed array.
         for (int i = 0; i < scores.size(); i++) {
-//            String[] temp = {s.username, s.score + "", s.scoreDate + ""};
+            // Gets each Score object's values and adds them to a new string array.
             String[] temp = {scores.get(i).username, scores.get(i).score + "", scores.get(i).scoreDate + ""};
             data[i] = temp;
         }
 
+        // Creates table, sets size, sets location, and adds to frame.
         table = new JTable(data, columns);
         table.setSize(BOARD_WIDTH, BOARD_HEIGHT/2);
         table.setLocation(0, (BOARD_HEIGHT + STATS_HEIGHT) / 5);
         this.add(new JScrollPane(table));
-
+        // Needed method when overwriting frame from what I understand.
         this.validate();
     }
 

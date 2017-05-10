@@ -14,10 +14,12 @@ public class DBmanager {
     protected String showAll;
     protected String insertNew;
     protected String updateOld;
-//    protected Connection conn;
 
+    // String for database url.
     final String DB_URL = "jdbc:sqlite:highscores.db";
 
+
+    // Constructor.
     public DBmanager() {
         try {
             Class.forName("org.sqlite.JDBC").newInstance();
@@ -28,10 +30,7 @@ public class DBmanager {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
-        dirPath = Paths.get(".").toAbsolutePath().normalize().toString();
-        System.out.println(dirPath);
+        // Creates sql statements formatted for prepared statements.
         createTbl = "CREATE TABLE IF NOT EXISTS scores (" +
                 "username text PRIMARY KEY, " +
                 "high_score integer NOT NULL," +
@@ -39,17 +38,16 @@ public class DBmanager {
         showAll = "SELECT * FROM scores";
         insertNew = "INSERT INTO scores VALUES(?, ?, ?)";       // not sure if needs column names
         updateOld = "UPDATE scores SET high_score = ? WHERE username = ?";
-
+        // Runs method to create database table.
         createTable();
     }
 
     private void createTable() {
 // TODO move statics to interface class later when working
-
+        // Connects to database and performs query to create table.
         try (Connection connection = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement()) {
                 statement.executeUpdate(createTbl);
-//                connection.commit();
         }
         catch (SQLException err) {
             err.printStackTrace();
@@ -63,13 +61,13 @@ public class DBmanager {
 
 
     protected ArrayList<Score> selectAll() {
+        // Connects to database and runs select all query.
         try (Connection connection = DriverManager.getConnection(DB_URL);
-//            PreparedStatement ps = connection.prepareStatement(showAll)) {
              Statement statement = connection.createStatement()) {
+            // Stores results in ResultSet.
             ResultSet rs = statement.executeQuery(showAll);
             if (rs != null) {
-
-
+                // Creates new array and stores data in it as new Score objects.
                 ArrayList<Score> scores = new ArrayList<>();
                 try {
                     while (rs.next()) {
@@ -83,9 +81,6 @@ public class DBmanager {
                     err.printStackTrace();
                 }
                 return scores;
-
-
-//                return rs;
             }
         }
         catch (SQLException err) {
@@ -98,50 +93,18 @@ public class DBmanager {
 
 
 
-
-//    protected ArrayList<Score> getRSscores(ResultSet rs) {
-//        ArrayList<Score> scores = new ArrayList<>();
-//        try {
-//            while (rs.next()) {
-//// TODO move statics to interface.
-//                String username = rs.getString("username");
-//                int score = rs.getInt("high_score");
-//                java.sql.Date scoreDate = rs.getDate("score_date");
-//                scores.add(new Score(username, score, scoreDate));
-//            }
-//        }
-//        catch (SQLException err) {
-//            err.printStackTrace();
-//        }
-//        return scores;
-//    }
-
-
-
-
-
-
     protected void addNewEntry(String username, int score) {
+        // Connects to database and runs new entry query.
         try (Connection connection = DriverManager.getConnection(DB_URL);
              PreparedStatement ps = connection.prepareStatement(insertNew)) {
-//            PreparedStatement ps = conn.prepareStatement(insertNew);
-
-//        PreparedStatement ps = conn.prepareStatement(insertNew)) {
-//        try {
-//            conn = makeConnection();
-//            Statement statement = conn.createStatement();
-//            PreparedStatement ps = conn.prepareStatement(insertNew);
+            // Sets prepared statement.
             ps.setString(1, username);
             ps.setInt(2, score);
             Date currDate = new Date();
+            // Makes Date object that is formatted for SQL.
             java.sql.Date sqlDate = new java.sql.Date(currDate.getTime());
             ps.setDate(3, sqlDate);
-//            System.out.println(sqlDate);
-//            System.out.println(sqlDate.toString());
-
             ps.executeUpdate();
-//            connection.close();
-//            System.out.println("closing time");
         }
         catch (SQLException err) {
             err.printStackTrace();
@@ -152,14 +115,13 @@ public class DBmanager {
 
 
 
-
     protected void updateEntry(String username, int newScore) {
+        // Connects to database and runs update query.
         try (Connection connection = DriverManager.getConnection(DB_URL);
         PreparedStatement ps = connection.prepareStatement(updateOld)) {
             ps.setInt(1, newScore);
             ps.setString(2, username);
             ps.executeUpdate();
-//            connection.close();
         }
         catch (SQLException err) {
             err.printStackTrace();
@@ -172,6 +134,7 @@ public class DBmanager {
 
 
     protected boolean isExist(String name, ArrayList<Score> scores) {
+        // Loops through array and checks the username.
         for (Score s : scores) {
             if (s.username.equalsIgnoreCase(name)) {
                 return true;
