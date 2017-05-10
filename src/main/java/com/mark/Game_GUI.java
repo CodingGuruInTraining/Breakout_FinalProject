@@ -43,8 +43,9 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
 //        frame.add(canvas);
         this.addKeyListener(this);
         this.pack();
-        this.setLocationRelativeTo(null);
+
         this.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
+        this.setLocationRelativeTo(null);
     }
 
 
