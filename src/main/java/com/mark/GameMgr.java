@@ -116,11 +116,11 @@ public class GameMgr implements Runnable, Globals{
     private void draw() {
         // Generates a BufferedStrategy object to utilize buffer frames
         // between renders.
-        bufferStrategy = gameFrame.getCanvas().getBufferStrategy();
+        bufferStrategy = gameFrame.getBufferStrategy();
         // Checks if an instance already exists and creates one if not.
         if (bufferStrategy == null) {
             // Note: One buffer is not enough.
-            gameFrame.getCanvas().createBufferStrategy(2);
+            gameFrame.createBufferStrategy(2);
             return;
         }
         // Makes graphics object for drawing.
