@@ -46,24 +46,14 @@ public class DBmanager {
     private void createTable() {
 // TODO move statics to interface class later when working
 
-
-
-//        String url = "jdbc:sqlite:" + dirPath + "/highscores.db";
-//        String url = "jdbc:sqlite:highscores.db";
         try (Connection connection = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement()) {
-//            if (connection != null) {
                 statement.executeUpdate(createTbl);
-//                return connection;
-//            }
-//            connection.close();
-//            statement.close();
         }
         catch (SQLException err) {
             err.printStackTrace();
         }
         System.out.println("database created successfully!");
-//        return null;
     }
 
 
@@ -73,8 +63,9 @@ public class DBmanager {
 
     protected ResultSet selectAll() {
         try (Connection connection = DriverManager.getConnection(DB_URL);
-            PreparedStatement ps = connection.prepareStatement(showAll)) {
-            ResultSet rs = ps.executeQuery();
+//            PreparedStatement ps = connection.prepareStatement(showAll)) {
+             Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(showAll);
             if (rs != null) {
                 return rs;
             }
@@ -113,12 +104,6 @@ public class DBmanager {
 
 
     protected void addNewEntry(String username, int score) {
-
-
-//        String url = "jdbc:sqlite:highscores.db";
-//        try (Connection conn = DriverManager.getConnection(url)) {
-
-
         try (Connection connection = DriverManager.getConnection(DB_URL);
              PreparedStatement ps = connection.prepareStatement(insertNew)) {
 //            PreparedStatement ps = conn.prepareStatement(insertNew);
