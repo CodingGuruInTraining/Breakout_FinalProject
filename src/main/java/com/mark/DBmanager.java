@@ -206,7 +206,8 @@ public class DBmanager {
 //        ArrayList<Score> scores = new ArrayList<>();
 
             System.out.println(scores.size());
-        System.out.println(scores.get(0).username);
+        System.out.println(scores.get(0).scoreDate);
+        // -446731200
     }
 }
 
