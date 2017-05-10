@@ -105,6 +105,7 @@ public class GameMgr implements Runnable, Globals{
         }
         // Runs Thread ending method as a redundant safety action.
         makeScore(score);
+        gameFrame.showHighScores(allScores);
 //        endGame();
     }
 
@@ -126,7 +127,7 @@ public class GameMgr implements Runnable, Globals{
         // Makes graphics object for drawing.
         graphics = bufferStrategy.getDrawGraphics();
         // Clears board.
-        graphics.clearRect(0, STATS_HEIGHT, BOARD_WIDTH, BOARD_HEIGHT);
+        graphics.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
 
         /** Draw commands: */
         // Runs the background draw methods.
@@ -313,9 +314,9 @@ public class GameMgr implements Runnable, Globals{
         gameFrame.promptUsername();
         String username = gameFrame.getGoodSubmit();
 // TODO query database for match
-//        java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
-//        scoreKeeper = new Score(username, score, currDate);
-//        allScores.add(scoreKeeper);
+        java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
+        scoreKeeper = new Score(username, score, currDate);
+        allScores.add(scoreKeeper);
     }
 }
 

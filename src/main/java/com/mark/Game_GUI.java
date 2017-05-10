@@ -95,6 +95,7 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
         while (username == "" || username == null) {
             username = JOptionPane.showInputDialog("Please enter a username:");
         }
+        goodSubmit = username;
     }
 
 
@@ -104,18 +105,19 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
     protected void showHighScores(ArrayList<Score> scores) {
 // TODO add timeout so still shows gameover screen briefly
         this.getContentPane().removeAll();
-//        Array columns =  {"Username", "High Score", "Date Achieved"};
-//        String[] data = new String[scores.size()];
-//
-////        for (Score s : scores) {
-//        for (int i = 0; i < scores.size(); i++) {
-////            String[] temp = {s.username, s.score + "", s.scoreDate + ""};
-//            String[] temp = {scores.get(i).username, scores.get(i).score + "", scores.get(i).scoreDate + ""};
-//            data[i] = temp;
-//        }
-//
-//        table = new JTable(scores, columns);
+        String[] columns =  {"Username", "High Score", "Date Achieved"};
+        String[][] data = new String[scores.size()][scores.size()];
 
+//        for (Score s : scores) {
+        for (int i = 0; i < scores.size(); i++) {
+//            String[] temp = {s.username, s.score + "", s.scoreDate + ""};
+            String[] temp = {scores.get(i).username, scores.get(i).score + "", scores.get(i).scoreDate + ""};
+            data[i] = temp;
+        }
+
+        table = new JTable(data, columns);
+
+        this.add(table);
 
         this.validate();
     }
