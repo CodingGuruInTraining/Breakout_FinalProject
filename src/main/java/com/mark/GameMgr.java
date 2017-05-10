@@ -72,11 +72,8 @@ public class GameMgr implements Runnable, Globals{
             }
         },0,1000);
 
-
         allScores = new ArrayList<Score>();
         dbMgr = new DBmanager();
-
-// TODO implement DBmanager object
     }
 
 
@@ -110,7 +107,6 @@ public class GameMgr implements Runnable, Globals{
         // Runs Thread ending method as a redundant safety action.
         makeScore(score);
         gameFrame.showHighScores(allScores);
-//        endGame();
     }
 
 
@@ -125,7 +121,7 @@ public class GameMgr implements Runnable, Globals{
         // Checks if an instance already exists and creates one if not.
         if (bufferStrategy == null) {
             // Note: One buffer is not enough.
-            gameFrame.createBufferStrategy(2);
+            gameFrame.createBufferStrategy(3);
             return;
         }
         // Makes graphics object for drawing.
@@ -156,7 +152,6 @@ public class GameMgr implements Runnable, Globals{
             // Checks if the player has run out of lives and ends the game if so.
             if (lives == 0) {
                 gameover();
-
             }
             else {
                 ball.setFloorHit(false);
@@ -193,7 +188,6 @@ public class GameMgr implements Runnable, Globals{
         else {
             gameON = false;
         }
-
         try {
             gameInstance.join();
         }
@@ -216,7 +210,6 @@ public class GameMgr implements Runnable, Globals{
                         (k * BRICK_WIDTH),       // x coord
                         ((i * BRICK_HEIGHT) + STATS_HEIGHT),      // y coord
                         brickColors[i]);         // color of brick
-//                        graphics);
                 bricks.add(b);
             }
         }
@@ -301,17 +294,9 @@ public class GameMgr implements Runnable, Globals{
         graphics.setFont(new Font("Rockwell", Font.PLAIN, 33));
         graphics.drawString("Your Score: " + score, ball.START_X/2, interval * 3);
 
-//        java.sql.Date currDate = new java.sql.Date(new java.util.Date().getTime());
-//        scoreKeeper = new Score(,score, currDate);
-//        allScores.add(scoreKeeper);
-
-
         // Turns off loop and ends thread.
         gameON = false;
         endGame();
-//        String username = gameFrame.promptUsername();
-
-//        makeScore(score);
     }
 
     protected void makeScore(int score) {

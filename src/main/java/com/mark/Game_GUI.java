@@ -46,6 +46,12 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
         this.add(scoreLabel);
         this.add(timeLabel);
         this.add(livesLabel);
+        // Breaks up the window's width into intervals.
+        int interval = STATS_WIDTH / 7;
+
+        scoreLabel.setLocation(5, 20);
+        livesLabel.setLocation(interval * 6, 20);
+        timeLabel.setLocation(STATS_WIDTH/2, 20);
 
         this.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
         this.setLocationRelativeTo(null);
@@ -61,17 +67,16 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
 
     // Draw method for the scoreboard at top.
     protected void drawScoreboard(int score, int time, int lives, Graphics g) {
-        // Breaks up the window's width into intervals.
-        int interval = STATS_WIDTH / 7;
+
         // Sets color for text.
         g.setColor(Color.white);
 
         // Updates label information with passed variables.
         scoreLabel.setText("Score: " + score);
-        scoreLabel.setLocation(5, 20);
+
 
         livesLabel.setText("Lives: " + lives);
-        livesLabel.setLocation(interval * 6, 20);
+
 
 //        g.drawString("Score: " + score, 5, 20);
 //        g.drawString("Lives: " + lives, interval * 6, 20);
@@ -99,7 +104,7 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
         }
 
         timeLabel.setText(timeTxt);
-        timeLabel.setLocation(STATS_WIDTH/2, 20);
+
 //        g.drawString(timeTxt, STATS_WIDTH/2, 20);
     }
 
