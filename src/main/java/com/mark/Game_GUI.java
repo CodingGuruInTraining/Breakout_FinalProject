@@ -13,18 +13,18 @@ import java.util.ArrayList;
 /**
  * This Class outlines the design for the GUI object.
  */
-public class Game_GUI implements KeyListener, Globals {
-    private JFrame frame;
-    private Canvas canvas;
+public class Game_GUI extends JFrame implements KeyListener, Globals {
+   // private JFrame frame;
+   // private Canvas canvas;
     private JTable table;
     // Variable represents what direction to move paddle.
     protected int moveDirection = 0;
     protected String goodSubmit;
 
     // Getters.
-    public Canvas getCanvas() {
-        return canvas;
-    }
+    //public Canvas getCanvas() {
+    //    return canvas;
+    //}
     public int getMoveDirection() { return moveDirection; }
     public String getGoodSubmit() { return goodSubmit; }
 
@@ -32,18 +32,20 @@ public class Game_GUI implements KeyListener, Globals {
 
     // Constructor.
     public Game_GUI() {
-        frame = new JFrame("Breakout Attempt");
-        frame.setSize(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setVisible(true);
+        //frame = new JFrame("Breakout Attempt");
 
-        canvas = new Canvas();
-        canvas.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
-        frame.add(canvas);
-        frame.addKeyListener(this);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
+        this.setSize(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setVisible(true);
+
+      //  canvas = new Canvas();
+      //  frame.add(canvas);
+        this.addKeyListener(this);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
+
     }
 
 
@@ -102,7 +104,7 @@ public class Game_GUI implements KeyListener, Globals {
 
     protected void showHighScores(ArrayList<Score> scores) {
 // TODO add timeout so still shows gameover screen briefly
-        frame.getContentPane().removeAll();
+        this.getContentPane().removeAll();
 //        Array columns =  {"Username", "High Score", "Date Achieved"};
 //        String[] data = new String[scores.size()];
 //
@@ -116,7 +118,7 @@ public class Game_GUI implements KeyListener, Globals {
 //        table = new JTable(scores, columns);
 
 
-        frame.validate();
+        this.validate();
     }
 
 
