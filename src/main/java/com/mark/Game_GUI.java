@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 /**
@@ -14,8 +16,7 @@ import java.awt.event.KeyListener;
 public class Game_GUI implements KeyListener, Globals {
     private JFrame frame;
     private Canvas canvas;
-    private JTextField userTextField;
-    private JButton submitButton;
+    private JTable table;
     // Variable represents what direction to move paddle.
     protected int moveDirection = 0;
     protected String goodSubmit;
@@ -99,6 +100,29 @@ public class Game_GUI implements KeyListener, Globals {
 
 
 
+    protected void showHighScores(ArrayList<Score> scores) {
+// TODO add timeout so still shows gameover screen briefly
+        frame.getContentPane().removeAll();
+//        Array columns =  {"Username", "High Score", "Date Achieved"};
+//        String[] data = new String[scores.size()];
+//
+////        for (Score s : scores) {
+//        for (int i = 0; i < scores.size(); i++) {
+////            String[] temp = {s.username, s.score + "", s.scoreDate + ""};
+//            String[] temp = {scores.get(i).username, scores.get(i).score + "", scores.get(i).scoreDate + ""};
+//            data[i] = temp;
+//        }
+//
+//        table = new JTable(scores, columns);
+
+
+        frame.validate();
+    }
+
+
+
+
+
 /******
  Keypress Listeners
  ********/
@@ -125,3 +149,5 @@ public class Game_GUI implements KeyListener, Globals {
 
 //helpers:
 //        http://stackoverflow.com/questions/21997130/how-to-use-keylistener-with-jframe
+
+// http://stackoverflow.com/questions/9347076/how-to-remove-all-components-from-a-jframe-in-java

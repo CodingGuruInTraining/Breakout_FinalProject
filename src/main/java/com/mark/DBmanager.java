@@ -49,6 +49,7 @@ public class DBmanager {
         try (Connection connection = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement()) {
                 statement.executeUpdate(createTbl);
+//                connection.commit();
         }
         catch (SQLException err) {
             err.printStackTrace();
@@ -61,13 +62,30 @@ public class DBmanager {
 
 
 
-    protected ResultSet selectAll() {
+    protected ArrayList<Score> selectAll() {
         try (Connection connection = DriverManager.getConnection(DB_URL);
 //            PreparedStatement ps = connection.prepareStatement(showAll)) {
              Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(showAll);
             if (rs != null) {
-                return rs;
+
+
+                ArrayList<Score> scores = new ArrayList<>();
+                try {
+                    while (rs.next()) {
+                        String username = rs.getString("username");
+                        int score = rs.getInt("high_score");
+                        java.sql.Date scoreDate = rs.getDate("score_date");
+                        scores.add(new Score(username, score, scoreDate));
+                    }
+                }
+                catch (SQLException err) {
+                    err.printStackTrace();
+                }
+                return scores;
+
+
+//                return rs;
             }
         }
         catch (SQLException err) {
@@ -81,22 +99,22 @@ public class DBmanager {
 
 
 
-    protected ArrayList<Score> getRSscores(ResultSet rs) {
-        ArrayList<Score> scores = new ArrayList<>();
-        try {
-            while (rs.next()) {
-// TODO move statics to interface.
-                String username = rs.getString("username");
-                int score = rs.getInt("high_score");
-                java.sql.Date scoreDate = rs.getDate("score_date");
-                scores.add(new Score(username, score, scoreDate));
-            }
-        }
-        catch (SQLException err) {
-            err.printStackTrace();
-        }
-        return scores;
-    }
+//    protected ArrayList<Score> getRSscores(ResultSet rs) {
+//        ArrayList<Score> scores = new ArrayList<>();
+//        try {
+//            while (rs.next()) {
+//// TODO move statics to interface.
+//                String username = rs.getString("username");
+//                int score = rs.getInt("high_score");
+//                java.sql.Date scoreDate = rs.getDate("score_date");
+//                scores.add(new Score(username, score, scoreDate));
+//            }
+//        }
+//        catch (SQLException err) {
+//            err.printStackTrace();
+//        }
+//        return scores;
+//    }
 
 
 
@@ -170,8 +188,8 @@ public class DBmanager {
     public static void main(String[] args) {
         DBmanager mgr = new DBmanager();
 //        mgr.addNewEntry("test2", 42);
-        ResultSet rs = mgr.selectAll();
-        ArrayList<Score> scores = mgr.getRSscores(rs);
+        ArrayList<Score> scores = mgr.selectAll();
+//        ArrayList<Score> scores = mgr.getRSscores(rs);
 //        try {
 //            String name = rs.getCursorName();
 //            System.out.println(name);
@@ -188,7 +206,7 @@ public class DBmanager {
 //        ArrayList<Score> scores = new ArrayList<>();
 
             System.out.println(scores.size());
-//        System.out.println(scores.get(0).username);
+        System.out.println(scores.get(0).username);
     }
 }
 
