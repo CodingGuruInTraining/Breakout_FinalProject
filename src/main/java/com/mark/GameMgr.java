@@ -72,6 +72,9 @@ public class GameMgr implements Runnable, Globals{
             }
         },0,1000);
 
+
+        allScores = new ArrayList<Score>();
+
 // TODO implement DBmanager object
     }
 

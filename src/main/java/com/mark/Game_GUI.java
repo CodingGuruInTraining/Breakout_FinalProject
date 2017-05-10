@@ -104,7 +104,7 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
 
     protected void showHighScores(ArrayList<Score> scores) {
 // TODO add timeout so still shows gameover screen briefly
-        this.getContentPane().removeAll();
+//        this.getContentPane().removeAll();
         String[] columns =  {"Username", "High Score", "Date Achieved"};
         String[][] data = new String[scores.size()][scores.size()];
 
@@ -116,8 +116,9 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
         }
 
         table = new JTable(data, columns);
-
-        this.add(table);
+        table.setSize(BOARD_WIDTH, BOARD_HEIGHT/2);
+        table.setLocation(0, (BOARD_HEIGHT + STATS_HEIGHT) / 5);
+        this.add(new JScrollPane(table));
 
         this.validate();
     }
@@ -154,3 +155,4 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
 //        http://stackoverflow.com/questions/21997130/how-to-use-keylistener-with-jframe
 
 // http://stackoverflow.com/questions/9347076/how-to-remove-all-components-from-a-jframe-in-java
+// http://stackoverflow.com/questions/13935934/java-jtable-column-headers-not-showing
