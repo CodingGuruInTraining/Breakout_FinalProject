@@ -12,11 +12,11 @@ public interface Globals {
     public static final int BRICK_HEIGHT = 20;
     public static final int BALL_DIAMETER = 20;
     public static final int STATS_WIDTH = BOARD_WIDTH;
-    public static final int STATS_HEIGHT = 30;
-    public static final int FPS = 40;
+    public static final int STATS_HEIGHT = 60;
+    public static final int FPS = 30;
     public static final int LIVES_START = 3;
     public static final int POINTS_PER_HIT = 20;
-//    public static final int
+    public static final int TOTAL_HEIGHT = BOARD_HEIGHT + STATS_HEIGHT;
 //    public static final int
 //    public static final int
 

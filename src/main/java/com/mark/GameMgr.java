@@ -127,7 +127,7 @@ public class GameMgr implements Runnable, Globals{
         // Makes graphics object for drawing.
         graphics = bufferStrategy.getDrawGraphics();
         // Clears board.
-        graphics.clearRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
+        graphics.clearRect(0, 0, BOARD_WIDTH, TOTAL_HEIGHT);
 
         /** Draw commands: */
         // Runs the background draw methods.
@@ -242,6 +242,7 @@ public class GameMgr implements Runnable, Globals{
         // Loops through each brick and creates a Rectangle object for easy comparison
         // using builtin methods.
         for (Brick b : bricks) {
+// TODO create rectangle in Brick constructor.
             Rectangle brickRect = new Rectangle(b.x_loc, b.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
             // Checks if the two objects intersect.
             if (ballRect.intersects(brickRect)) {
@@ -289,7 +290,7 @@ public class GameMgr implements Runnable, Globals{
         graphics.setColor(Color.red);
         graphics.setFont(new Font("Rockwell", Font.PLAIN, 40));
         // Displays message.
-        int interval = (BOARD_HEIGHT + STATS_HEIGHT)/4;
+        int interval = (TOTAL_HEIGHT)/4;
         graphics.drawString("Gameover!", ball.START_X/2, interval);
         graphics.setFont(new Font("Rockwell", Font.PLAIN, 33));
         graphics.drawString("Your Score: " + score, ball.START_X/2, interval * 3);

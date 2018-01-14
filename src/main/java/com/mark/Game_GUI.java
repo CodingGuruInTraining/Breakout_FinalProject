@@ -22,6 +22,7 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
     // Variable represents what direction to move paddle.
     protected int moveDirection = 0;
     protected String goodSubmit;
+    private JPanel rootJPanel;
 
     // Getters.
     public int getMoveDirection() { return moveDirection; }
@@ -31,30 +32,44 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
 
     // Constructor.
     public Game_GUI() {
+//        setContentPane(rootJPanel);
 //        frame = new JFrame("Breakout Attempt");
-        this.setSize(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
+        this.setPreferredSize(new Dimension(BOARD_WIDTH, TOTAL_HEIGHT));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
 
+//        setLayout(new FlowLayout());
+//        rootJPanel.setPreferredSize(new Dimension(BOARD_WIDTH, TOTAL_HEIGHT));
+//        add(rootJPanel);
+
         this.addKeyListener(this);
+//        this.pack();
+
+//        scoreLabel = new JLabel();
+//        timeLabel = new JLabel();
+//        livesLabel = new JLabel();
+//
+//        this.add(scoreLabel);
+//        this.add(timeLabel);
+//        this.add(livesLabel);
+
         this.pack();
 
-        scoreLabel = new JLabel();
-        timeLabel = new JLabel();
-        livesLabel = new JLabel();
-        this.add(scoreLabel);
-        this.add(timeLabel);
-        this.add(livesLabel);
         // Breaks up the window's width into intervals.
-        int interval = STATS_WIDTH / 7;
+//        int interval = STATS_WIDTH / 7;
+//
+//        scoreLabel.setLocation(5, 20);
+//        livesLabel.setLocation(interval * 6, 20);
+//        timeLabel.setLocation(STATS_WIDTH/2, 20);
+//
+//        scoreLabel.setForeground(Color.white);
+//        livesLabel.setForeground(Color.white);
+//        timeLabel.setForeground(Color.red);
 
-        scoreLabel.setLocation(5, 20);
-        livesLabel.setLocation(interval * 6, 20);
-        timeLabel.setLocation(STATS_WIDTH/2, 20);
-
-        this.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT));
+        this.setSize(new Dimension(BOARD_WIDTH, TOTAL_HEIGHT));
         this.setLocationRelativeTo(null);
+//        this.pack();
     }
 
 
@@ -62,7 +77,7 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
     // Draw method.
     protected void draw(Graphics g) {
         g.setColor(Color.black);
-        g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT + STATS_HEIGHT);
+        g.fillRect(0, 0, BOARD_WIDTH, TOTAL_HEIGHT);
     }
 
     // Draw method for the scoreboard at top.
@@ -72,14 +87,14 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
         g.setColor(Color.white);
 
         // Updates label information with passed variables.
-        scoreLabel.setText("Score: " + score);
+//        scoreLabel.setText("Score: " + score);
 
 
-        livesLabel.setText("Lives: " + lives);
-
-
-//        g.drawString("Score: " + score, 5, 20);
-//        g.drawString("Lives: " + lives, interval * 6, 20);
+//        scoreLabel.validate();
+//        livesLabel.setText("Lives: " + lives);
+        int interval = STATS_WIDTH / 7;
+        g.drawString("Score: " + score, 5, 50);
+        g.drawString("Lives: " + lives, interval * 6,50);
 
         // Transforms time value into a more appealing style.
         String timeTxt = "";
@@ -103,9 +118,8 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
             }
         }
 
-        timeLabel.setText(timeTxt);
-
-//        g.drawString(timeTxt, STATS_WIDTH/2, 20);
+//        timeLabel.setText(timeTxt);
+        g.drawString(timeTxt, STATS_WIDTH/2, 50);
     }
 
 
@@ -141,7 +155,7 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
         // Creates table, sets size, sets location, and adds to frame.
         table = new JTable(data, columns);
         table.setSize(BOARD_WIDTH, BOARD_HEIGHT/2);
-        table.setLocation(0, (BOARD_HEIGHT + STATS_HEIGHT) / 5);
+        table.setLocation(0, (TOTAL_HEIGHT) / 5);
         this.add(new JScrollPane(table));
         // Needed method when overwriting frame from what I understand.
         this.validate();
