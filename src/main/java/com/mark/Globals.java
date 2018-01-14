@@ -17,6 +17,10 @@ public interface Globals {
     int LIVES_START = 3;
     int POINTS_PER_HIT = 20;
     int TOTAL_HEIGHT = BOARD_HEIGHT + STATS_HEIGHT;
+    int BALL_X = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
+    int BALL_Y = ((TOTAL_HEIGHT / 2) - (BALL_DIAMETER / 2));
+    int BALL_X_SPD = 2;
+    int BALL_Y_SPD = 5;
 }
 
 

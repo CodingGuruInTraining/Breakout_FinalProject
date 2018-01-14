@@ -11,12 +11,10 @@ public class Ball implements Globals {
     protected int y_loc;
     protected int x_spd;
     protected int y_spd;
+    private int radius;
 
-    // Defines starting location and speed for ball reset.
-    protected int START_X;
-    protected int START_Y;
-    protected int START_X_SPD;
-    protected int START_Y_SPD;
+    private int rightWall;
+    private int floor;
 
     // Flag to show ball has gone off the deep end.
     protected boolean floorHit = false;
@@ -33,12 +31,11 @@ public class Ball implements Globals {
 
     // Constructor.
     public Ball() {
+        radius = BALL_DIAMETER / 2;
+        rightWall = BOARD_WIDTH - BALL_DIAMETER;
+        floor = TOTAL_HEIGHT - BALL_DIAMETER;
         // Sets the Ball's starting location to 1/3 of window's width
         // and 1/2 of window's height.
-        this.START_X = ((BOARD_WIDTH / 3) - (BALL_DIAMETER / 2));
-        this.START_Y = (((BOARD_HEIGHT + STATS_HEIGHT) / 2) - (BALL_DIAMETER / 2));
-        this.START_X_SPD = 2;
-        this.START_Y_SPD = 5; // 3;
         resetBall();
     }
 
@@ -67,7 +64,7 @@ public class Ball implements Globals {
             this.x_spd *= -1;
         }
         // Checks if the Ball is at the right wall.
-        else if (this.x_loc >= (BOARD_WIDTH - BALL_DIAMETER) && this.y_loc > STATS_HEIGHT) {
+        else if (this.x_loc >= rightWall && this.y_loc > STATS_HEIGHT) {
             this.x_spd *= -1;
         }
         // Checks if the Ball is at the top wall.
@@ -75,10 +72,11 @@ public class Ball implements Globals {
             this.y_spd *= -1;
         }
         // Detects floor to remove life.
-        else if (this.y_loc >= (TOTAL_HEIGHT - BALL_DIAMETER) && this.x_loc > 0) {
+        else if (this.y_loc >= floor && this.x_loc > 0) {
             this.floorHit = true;
         }
-        int radius = BALL_DIAMETER / 2;
+
+        // Checks if ball hit the paddle.
         if ((this.y_loc + BALL_DIAMETER) >= paddleY) {
             if (((this.x_loc + radius) >= paddleX) &&
                     ((this.x_loc + BALL_DIAMETER) <= (paddleX + PADDLE_WIDTH) + radius)) {
@@ -94,11 +92,10 @@ public class Ball implements Globals {
 
     // Moves the ball back to its starting position.
     protected void resetBall() {
-// TODO add starting variables for x, y, and their speeds
-        this.x_loc = this.START_X;
-        this.y_loc = this.START_Y;
-        this.x_spd = this.START_X_SPD;
-        this.y_spd = this.START_Y_SPD;
+        this.x_loc = BALL_X;
+        this.y_loc = BALL_Y;
+        this.x_spd = BALL_X_SPD;
+        this.y_spd = BALL_Y_SPD;
     }
 
 

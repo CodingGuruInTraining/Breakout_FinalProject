@@ -296,9 +296,9 @@ public class GameMgr implements Runnable, Globals{
         graphics.setFont(new Font("Rockwell", Font.PLAIN, 40));
         // Displays message.
         int interval = (TOTAL_HEIGHT)/4;
-        graphics.drawString("Gameover!", ball.START_X/2, interval);
+        graphics.drawString("Gameover!", BALL_X/2, interval);
         graphics.setFont(new Font("Rockwell", Font.PLAIN, 33));
-        graphics.drawString("Your Score: " + score, ball.START_X/2, interval * 3);
+        graphics.drawString("Your Score: " + score, BALL_X/2, interval * 3);
 
         // Turns off loop and ends thread.
         gameON = false;
