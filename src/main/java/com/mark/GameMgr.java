@@ -145,20 +145,11 @@ public class GameMgr implements Runnable, Globals{
         // Runs method that detects any collisions between the ball and each
         // brick object.
         detectCollisions();
+
         // Checks if boolean flag in Ball Class is indicating the ball has hit
         // the floor and should be punished by losing a life.
-        if (ball.getFloorHit()) {
-            lives--;
-            // Checks if the player has run out of lives and ends the game if so.
-            if (lives == 0) {
-                gameover();
-            }
-            else {
-                ball.setFloorHit(false);
-                ball.resetBall();
-            }
+        floorCheck();
 
-        }
         // Finalize process.
         bufferStrategy.show();
         graphics.dispose();
@@ -198,12 +189,12 @@ public class GameMgr implements Runnable, Globals{
 
 
 
+
 /*************
  *  Makes all Bricks at start
  *  **************/
     protected void makeBricks() {
         // Makes Brick objects and store in array.
-// TODO change rowsofbricks to array length or something
         for (int i = 0; i < rowsOfBricks; i++) {       // for num of rows...
             for (int k = 0; k < bricksPerRow; k++) {    // for bricks in each row...
                 Brick b = new Brick(
@@ -242,8 +233,7 @@ public class GameMgr implements Runnable, Globals{
         // Loops through each brick and creates a Rectangle object for easy comparison
         // using builtin methods.
         for (Brick b : bricks) {
-// TODO create rectangle in Brick constructor.
-            Rectangle brickRect = new Rectangle(b.x_loc, b.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
+            Rectangle brickRect = b.getBrickRect();
             // Checks if the two objects intersect.
             if (ballRect.intersects(brickRect)) {
                 // Creates two variables that hold how much of an overlap the two
@@ -277,6 +267,21 @@ public class GameMgr implements Runnable, Globals{
     }
 
 
+
+
+    private void floorCheck() {
+        if (ball.getFloorHit()) {
+            lives--;
+            // Checks if the player has run out of lives and ends the game if so.
+            if (lives == 0) {
+                gameover();
+            }
+            else {
+                ball.setFloorHit(false);
+                ball.resetBall();
+            }
+        }
+    }
 
 
 

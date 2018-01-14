@@ -13,7 +13,7 @@ public class Brick implements Globals{
     protected int x_loc;
     protected int y_loc;
     protected Color color;
-
+    private Rectangle brickRect;
 
 
 
@@ -23,6 +23,9 @@ public class Brick implements Globals{
         this.x_loc = x;
         this.y_loc = y;
         this.color = color;
+
+        // Creates rectangle object for comparing against Ball.
+        brickRect = new Rectangle(x_loc, y_loc, BRICK_WIDTH, BRICK_HEIGHT);
     }
 
 
@@ -36,4 +39,9 @@ public class Brick implements Globals{
         g.setColor(black);
         g.drawRect(this.x_loc, this.y_loc, BRICK_WIDTH, BRICK_HEIGHT);
     }
+
+
+
+    // Getter.
+    public Rectangle getBrickRect() {return brickRect; }
 }

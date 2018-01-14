@@ -15,14 +15,15 @@ import java.util.ArrayList;
  */
 public class Game_GUI extends JFrame implements KeyListener, Globals {
     private JTable table;
-    private JLabel scoreLabel;
-    private JLabel timeLabel;
-    private JLabel livesLabel;
+    private JPanel rootJPanel;
 
     // Variable represents what direction to move paddle.
     protected int moveDirection = 0;
+    // Variable to hold username entry at end of game.
     protected String goodSubmit;
-    private JPanel rootJPanel;
+    // Ratio for placing strings on screen.
+    private int interval = STATS_WIDTH / 7;
+
 
     // Getters.
     public int getMoveDirection() { return moveDirection; }
@@ -32,45 +33,23 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
 
     // Constructor.
     public Game_GUI() {
-//        setContentPane(rootJPanel);
-//        frame = new JFrame("Breakout Attempt");
+        // Sets up window aspects.
         this.setPreferredSize(new Dimension(BOARD_WIDTH, TOTAL_HEIGHT));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
 
-//        setLayout(new FlowLayout());
-//        rootJPanel.setPreferredSize(new Dimension(BOARD_WIDTH, TOTAL_HEIGHT));
-//        add(rootJPanel);
-
+        // Adds key listener for paddle movements.
         this.addKeyListener(this);
-//        this.pack();
 
-//        scoreLabel = new JLabel();
-//        timeLabel = new JLabel();
-//        livesLabel = new JLabel();
-//
-//        this.add(scoreLabel);
-//        this.add(timeLabel);
-//        this.add(livesLabel);
-
+        // Packs window.
         this.pack();
 
-        // Breaks up the window's width into intervals.
-//        int interval = STATS_WIDTH / 7;
-//
-//        scoreLabel.setLocation(5, 20);
-//        livesLabel.setLocation(interval * 6, 20);
-//        timeLabel.setLocation(STATS_WIDTH/2, 20);
-//
-//        scoreLabel.setForeground(Color.white);
-//        livesLabel.setForeground(Color.white);
-//        timeLabel.setForeground(Color.red);
-
+        // Adjusts window size.
         this.setSize(new Dimension(BOARD_WIDTH, TOTAL_HEIGHT));
         this.setLocationRelativeTo(null);
-//        this.pack();
     }
+
 
 
 
@@ -80,46 +59,41 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
         g.fillRect(0, 0, BOARD_WIDTH, TOTAL_HEIGHT);
     }
 
+
+
+
     // Draw method for the scoreboard at top.
     protected void drawScoreboard(int score, int time, int lives, Graphics g) {
-
         // Sets color for text.
         g.setColor(Color.white);
 
-        // Updates label information with passed variables.
-//        scoreLabel.setText("Score: " + score);
+        // Formats the time into specific style.
+        String timeTxt = formatTime(time);
 
-
-//        scoreLabel.validate();
-//        livesLabel.setText("Lives: " + lives);
-        int interval = STATS_WIDTH / 7;
+        // Draws values to screen.
         g.drawString("Score: " + score, 5, 50);
         g.drawString("Lives: " + lives, interval * 6,50);
+        g.drawString(timeTxt, STATS_WIDTH/2, 50);
+    }
 
-        // Transforms time value into a more appealing style.
-        String timeTxt = "";
+
+
+
+    // Transforms time value into a more appealing style.
+    private String formatTime(int time) {
+        String timeTxt;
 
         if (time >= 60) {
             int minutes = time / 60;
             int seconds = time % 60;
-            if (seconds < 10) {
-                timeTxt = minutes + ":0" + seconds;
-            }
-            else {
-                timeTxt = minutes + ":" + seconds;
-            }
+            if (seconds < 10) { timeTxt = minutes + ":0" + seconds; }
+            else { timeTxt = minutes + ":" + seconds; }
         }
         else {
-            if (time < 10) {
-                timeTxt = "0:0" + time;
-            }
-            else {
-                timeTxt = "0:" + time;
-            }
+            if (time < 10) { timeTxt = "0:0" + time; }
+            else { timeTxt = "0:" + time; }
         }
-
-//        timeLabel.setText(timeTxt);
-        g.drawString(timeTxt, STATS_WIDTH/2, 50);
+        return timeTxt;
     }
 
 
@@ -129,7 +103,7 @@ public class Game_GUI extends JFrame implements KeyListener, Globals {
     protected void promptUsername() {
         String username = JOptionPane.showInputDialog("Please enter a username:");
         // Validates that user enters a value.
-        while (username == "" || username == null) {
+        while (username.equals("")) {
             username = JOptionPane.showInputDialog("Please enter a username:");
         }
         // Sets variable to input.
