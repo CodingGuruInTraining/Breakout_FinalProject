@@ -75,14 +75,16 @@ public class Ball implements Globals {
             this.y_spd *= -1;
         }
         // Detects floor to remove life.
-        else if (this.y_loc >= ((BOARD_HEIGHT + STATS_HEIGHT) - BALL_DIAMETER) && this.x_loc > 0) {
+        else if (this.y_loc >= (TOTAL_HEIGHT - BALL_DIAMETER) && this.x_loc > 0) {
             this.floorHit = true;
         }
         int radius = BALL_DIAMETER / 2;
         if ((this.y_loc + BALL_DIAMETER) >= paddleY) {
             if (((this.x_loc + radius) >= paddleX) &&
                     ((this.x_loc + BALL_DIAMETER) <= (paddleX + PADDLE_WIDTH) + radius)) {
-                this.y_spd *= -1;
+                if (this.y_spd >= 0) {
+                    this.y_spd *= -1;
+                }
             }
         }
     }
