@@ -332,12 +332,3 @@ public class GameMgr implements Runnable, Globals{
 
 
 
-// Learned a lot about game structures from the tutorial linked below. This app's structure was adapted
-// from the lessons learned.
-//https://www.youtube.com/watch?v=lf9awz6j88Q&list=PLah6faXAgguMnTBs3JnEJY0shAc18XYQZ&index=2
-
-// Timer help:
-//http://stackoverflow.com/questions/14454063/how-to-make-a-timer
-
-// Collision detection help:
-//http://stackoverflow.com/questions/19408458/brickbreaker-clone-ball-brick-collision-and-ball-behavior-on-brick-collision

@@ -178,12 +178,4 @@ public class DBmanager {
 
 
 
-//directory path help:
-//        http://stackoverflow.com/questions/4871051/getting-the-current-working-directory-in-java
-
-// connection help:
-//http://www.sqlitetutorial.net/sqlite-java/create-database/
-
-// sql Date format help:
-//http://stackoverflow.com/questions/18257648/get-the-current-date-in-java-sql-date-format
 

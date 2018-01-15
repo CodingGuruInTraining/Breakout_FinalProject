@@ -26,5 +26,3 @@ public interface Globals {
 
 
 
-//learned about this interface thing from:
-//        http://zetcode.com/tutorials/javagamestutorial/breakout/
